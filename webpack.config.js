@@ -1,24 +1,28 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/signup.js', // Entry point of your application
-    output: {
-        filename: 'bundle.js', // Output bundle file
-        path: path.resolve(__dirname, 'dist') // Output directory
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/, // Transform all .js files
-                exclude: /node_modules/, // Except files in node_modules
-                use: {
-                    loader: 'babel-loader', // Use Babel loader
-                    options: {
-                        presets: ['@babel/preset-env'] // Use the env preset
-                    }
-                }
-            }
-        ]
-    },
-    mode: 'development' // Set the mode to development
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'public')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      }
+    ]
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'public'),
+    compress: true,
+    port: 9000,
+    open: true, // This will open a new tab, set to false to avoid it
+    hot: true
+  },
+  mode: 'development'
 };

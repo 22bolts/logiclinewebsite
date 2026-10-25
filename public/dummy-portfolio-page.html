@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Showcase</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .video-background video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .video-background video.active {
+            opacity: 1;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        .project-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .project-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .project-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .project-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .project-info h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .genre {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .download-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .download-btn i {
+            font-size: 1.2rem;
+        }
+
+        .tech-stack-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 80px 20px;
+        }
+
+        .tech-stack-section h3 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .feature-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .view-more-btn {
+            display: block;
+            width: fit-content;
+            margin: 40px auto 0;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-more-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .technologies-section {
+            background: #0f0f1e;
+            padding: 60px 20px;
+        }
+
+        .technologies-section h4 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .tech-list {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .tech-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .tech-badge i {
+            font-size: 1.2rem;
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .project-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .project-info h2 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .download-links {
+                flex-direction: column;
+            }
+
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Backgrounds -->
+    <div class="video-background">
+        <video id="video1" class="active" autoplay muted loop playsinline>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-person-using-a-cell-phone-in-the-dark-5306-large.mp4" type="video/mp4">
+        </video>
+        <video id="video2" autoplay muted loop playsinline>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-developer-working-on-their-laptop-and-phone-5302-large.mp4" type="video/mp4">
+        </video>
+        <video id="video3" autoplay muted loop playsinline>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-working-on-a-computer-5304-large.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+
+    <!-- Project 1 -->
+    <section class="project-section" data-video="video1">
+        <div class="container">
+            <div class="project-content">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop" alt="TaskFlow Pro">
+                </div>
+                <div class="project-info">
+                    <h2>TaskFlow Pro</h2>
+                    <span class="genre">Productivity • Task Management</span>
+                    <p class="description">
+                        A powerful task management application that helps teams collaborate efficiently. 
+                        Features real-time sync, custom workflows, and intelligent task prioritization 
+                        powered by machine learning algorithms.
+                    </p>
+                    <div class="download-links">
+                        <a href="#" class="download-btn">
+                            <i class="fab fa-google-play"></i>
+                            <span>Play Store</span>
+                        </a>
+                        <a href="#" class="download-btn">
+                            <i class="fab fa-app-store-ios"></i>
+                            <span>App Store</span>
+                        </a>
+                        <a href="#" class="download-btn">
+                            <i class="fab fa-windows"></i>
+                            <span>Windows</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down" style="font-size: 2rem; opacity: 0.7;"></i>
+        </div>
+    </section>
+
+    <!-- Tech Stack 1 -->
+    <div class="tech-stack-section">
+        <div class="container">
+            <h3>Key Features</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h4>Real-time Sync</h4>
+                    <p>Seamless synchronization across all devices with instant updates and notifications.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Team Collaboration</h4>
+                    <p>Built-in chat, file sharing, and collaborative task boards for efficient teamwork.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h4>Smart Prioritization</h4>
+                    <p>AI-powered task ranking based on deadlines, importance, and team capacity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Analytics Dashboard</h4>
+                    <p>Comprehensive insights into productivity patterns and project progress.</p>
+                </div>
+            </div>
+            <button class="view-more-btn">View Full Project Details</button>
+        </div>
+    </div>
+
+    <!-- Technologies 1 -->
+    <div class="technologies-section">
+        <div class="container">
+            <h4>Software & Technologies Used</h4>
+            <div class="tech-list">
+                <div class="tech-badge">
+                    <i class="fab fa-react"></i>
+                    <span>React Native</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fab fa-node-js"></i>
+                    <span>Node.js</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-database"></i>
+                    <span>MongoDB</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fab fa-aws"></i>
+                    <span>AWS</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-bolt"></i>
+                    <span>Socket.io</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-lock"></i>
+                    <span>JWT Auth</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fab fa-docker"></i>
+                    <span>Docker</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-code"></i>
+                    <span>TypeScript</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 2 -->
+    <section class="project-section" data-video="video2">
+        <div class="container">
+            <div class="project-content">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="DataViz Studio">
+                </div>
+                <div class="project-info">
+                    <h2>DataViz Studio</h2>
+                    <span class="genre">Analytics • Data Visualization</span>
+                    <p class="description">
+                        Transform complex data into beautiful, interactive visualizations. 
+                        Features drag-and-drop interface, real-time data connections, and 
+                        customizable templates for professional presentations.
+                    </p>
+                    <div class="download-links">
+                        <a href="#" class="download-btn">
+                            <i class="fab fa-google-play"></i>
+                            <span>Play Store</span>
+                        </a>
+                        <a href="#" class="download-btn">
+                            <i class="fab fa-windows"></i>
+                            <span>Windows</span>
+                        </a>
+                        <a href="#" class="download-btn">
+                            <i class="fab fa-apple"></i>
+                            <span>macOS</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack 2 -->
+    <div class="tech-stack-section">
+        <div class="container">
+            <h3>Key Features</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h4>Interactive Charts</h4>
+                    <p>20+ chart types with full customization and animation capabilities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h4>Data Connectors</h4>
+                    <p>Direct integration with databases, APIs, and popular data sources.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h4>Custom Themes</h4>
+                    <p>Beautiful pre-designed themes and full color customization options.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h4>Easy Export</h4>
+                    <p>Export to PNG, PDF, SVG, or embed interactive charts in websites.</p>
+                </div>
+            </div>
+            <button class="view-more-btn">View Full Project Details</button>
+        </div>
+    </div>
+
+    <!-- Technologies 2 -->
+    <div class="technologies-section">
+        <div class="container">
+            <h4>Software & Technologies Used</h4>
+            <div class="tech-list">
+                <div class="tech-badge">
+                    <i class="fab fa-vuejs"></i>
+                    <span>Vue.js</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-code"></i>
+                    <span>D3.js</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fab fa-python"></i>
+                    <span>Python</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-fire"></i>
+                    <span>Firebase</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-database"></i>
+                    <span>PostgreSQL</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Chart.js</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fab fa-sass"></i>
+                    <span>SCSS</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-cube"></i>
+                    <span>WebGL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 3 -->
+    <section class="project-section" data-video="video3">
+        <div class="container">
+            <div class="project-content">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=800&h=600&fit=crop" alt="FitTrack Plus">
+                </div>
+                <div class="project-info">
+                    <h2>FitTrack Plus</h2>
+                    <span class="genre">Health & Fitness • Wellness</span>
+                    <p class="description">
+                        Your personal fitness companion with AI-powered workout plans, 
+                        nutrition tracking, and progress analytics. Integrates with popular 
+                        wearables and provides personalized coaching.
+                    </p>
+                    <div class="download-links">
+                        <a href="#" class="download-btn">
+                            <i class="fab fa-google-play"></i>
+                            <span>Play Store</span>
+                        </a>
+                        <a href="#" class="download-btn">
+                            <i class="fab fa-app-store-ios"></i>
+                            <span>App Store</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack 3 -->
+    <div class="tech-stack-section">
+        <div class="container">
+            <h3>Key Features</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h4>AI Workout Plans</h4>
+                    <p>Personalized workout routines adapted to your fitness level and goals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h4>Nutrition Tracking</h4>
+                    <p>Comprehensive food database with macro tracking and meal planning.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h4>Wearable Sync</h4>
+                    <p>Seamless integration with Apple Watch, Fitbit, and other devices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h4>Progress Tracking</h4>
+                    <p>Visual progress reports, achievements, and milestone celebrations.</p>
+                </div>
+            </div>
+            <button class="view-more-btn">View Full Project Details</button>
+        </div>
+    </div>
+
+    <!-- Technologies 3 -->
+    <div class="technologies-section">
+        <div class="container">
+            <h4>Software & Technologies Used</h4>
+            <div class="tech-list">
+                <div class="tech-badge">
+                    <i class="fab fa-swift"></i>
+                    <span>Swift</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fab fa-android"></i>
+                    <span>Kotlin</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-fire"></i>
+                    <span>Firebase</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-brain"></i>
+                    <span>TensorFlow</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-database"></i>
+                    <span>Realm</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fab fa-apple"></i>
+                    <span>HealthKit</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Core ML</span>
+                </div>
+                <div class="tech-badge">
+                    <i class="fas fa-cloud"></i>
+                    <span>GraphQL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Intersection Observer for video switching
+        const sections = document.querySelectorAll('.project-section');
+        const videos = {
+            video1: document.getElementById('video1'),
+            video2: document.getElementById('video2'),
+            video3: document.getElementById('video3')
+        };
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const videoId = entry.target.dataset.video;
+                    
+                    // Deactivate all videos
+                    Object.values(videos).forEach(video => {
+                        video.classList.remove('active');
+                    });
+                    
+                    // Activate current video
+                    if (videos[videoId]) {
+                        videos[videoId].classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // View more button functionality
+        document.querySelectorAll('.view-more-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('This would navigate to the full project details page!');
+            });
+        });
+    </script>
+</body>
+</html>

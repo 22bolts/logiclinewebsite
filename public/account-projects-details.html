@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <title>Mizzle - Technology and Corporate Bootstrap Theme</title>
+    
+        <!-- Meta Tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="author" content="Webestica.com">
+        <meta name="description" content="Technology and Corporate Bootstrap Theme">
+    
+        <!-- Dark mode -->
+        <script>
+            const storedTheme = localStorage.getItem('theme')
+     
+            const getPreferredTheme = () => {
+                if (storedTheme) {
+                    return storedTheme
+                }
+                return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'light'
+            }
+    
+            const setTheme = function (theme) {
+                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark')
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', theme)
+                }
+            }
+    
+            setTheme(getPreferredTheme())
+    
+            window.addEventListener('DOMContentLoaded', () => {
+                var el = document.querySelector('.theme-icon-active');
+                if(el != 'undefined' && el != null) {
+                    const showActiveTheme = theme => {
+                    const activeThemeIcon = document.querySelector('.theme-icon-active use')
+                    const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+                    const svgOfActiveBtn = btnToActive.querySelector('.mode-switch use').getAttribute('href')
+    
+                    document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                        element.classList.remove('active')
+                    })
+    
+                    btnToActive.classList.add('active')
+                    activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+                }
+    
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                    if (storedTheme !== 'light' || storedTheme !== 'dark') {
+                        setTheme(getPreferredTheme())
+                    }
+                })
+    
+                showActiveTheme(getPreferredTheme())
+    
+                document.querySelectorAll('[data-bs-theme-value]')
+                    .forEach(toggle => {
+                        toggle.addEventListener('click', () => {
+                            const theme = toggle.getAttribute('data-bs-theme-value')
+                            localStorage.setItem('theme', theme)
+                            setTheme(theme)
+                            showActiveTheme(theme)
+                        })
+                    })
+    
+                }
+            })
+            
+        </script>
+    
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+    
+        <!-- Google Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        
+        <link rel="stylesheet" type="text/css" href="assets/vendor/swiper/swiper-bundle.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/vendor/aos/aos.css">
+        
+        <!-- Theme CSS -->
+	    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<!-- <link rel="stylesheet" type="text/css" href="assets/css/job/style.css" media="all"> -->
+        <link rel="stylesheet" type="text/css" href="assets/css/myProject/styles.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+
+    <script src="assets/js/userDetails.js"></script>
+    
+<!-- Header START -->
+<header class="header-sticky header-absolute">
+	<!-- Logo Nav START -->
+	<nav class="navbar navbar-expand-xl">
+		<div class="container">
+			<!-- Logo START -->
+			<a class="navbar-brand me-0" href="index.html">
+				<img class="light-mode-item ec-logo" src="assets/images/ec_logo-dark.png" alt="logo">
+				<img class="dark-mode-item navbar-brand-item" src="assets/images/ec_logo-bright.png" alt="logo">
+			</a>
+			<!-- Logo END -->
+
+			<!-- Main navbar START -->
+			<div class="navbar-collapse collapse" id="navbarCollapse">
+				<ul class="navbar-nav navbar-nav-scroll dropdown-hover mx-auto">
+
+					<li class="nav-item"> <a class="nav-link" href="index.html">Home</a> </li>
+					
+					<!-- <li class="nav-item"> <a class="nav-link" href="account-projects.html">Projects</a> </li> -->
+					
+					<!-- <li class="nav-item"> <a class="nav-link" href="new-project.html">New Project</a> </li> -->
+					
+					<!-- <li class="nav-item"> <a class="nav-link" href="account-profile.html">Profile</a> </li> -->
+
+					<!-- <li class="nav-item"> <a class="nav-link" href="account-detail.html">Profile2</a> </li> -->
+
+					<!-- <li class="nav-item"> <a class="nav-link" href="account-delete.html">Delete account</a> </li> -->
+
+					<li class="nav-item"> <a class="nav-link" href="feature-single.html">API as a Service</a> </li>
+					<!-- <li class="nav-item"> <a class="nav-link" href="about-v1.html">About us</a> </li> -->
+					
+					<li class="nav-item"> <a class="nav-link" href="services-v1.html">Services</a> </li>
+					
+					<li class="nav-item"> <a class="nav-link" href="pricing.html">Pricing</a> </li>
+					
+					<li class="nav-item"> <a class="nav-link" href="career.html">Career</a> </li>
+
+					
+
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">Job</a>
+						<ul class="dropdown-menu">
+							<!-- Dropdown Multilevel -->
+							<li> 
+								<a class="dropdown-item" href="job-list.html">Get hired</a> 
+							</li>
+							<li> 
+								<a class="dropdown-item" href="freelancerList.html">Freelancers</a> 
+							</li>
+						</ul>
+					</li>
+
+					<!-- Nav item -->
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Portfolio</a>
+						<div class="dropdown-menu dropdown-menu-center dropdown-menu-size-xl p-4">
+							<div class="row g-xl-3">
+								<!-- Work -->
+								<div class="col-xl-8 d-none d-xl-block">
+									<div class="d-flex gap-4">
+										<div class="col-xl-8 d-none d-xl-block">
+											<div class="card bg-transparent">
+												<!-- Dynamic Image Section -->
+												<div id="service-image" class="card bg-transparent">
+													<img src="assets/images/portfolio/list/default.jpg" class="card-img" alt="Service Image">
+												</div>											<!-- Card body -->
+												<div class="card-body px-0 text-start pb-0">
+													<h6><a href="#">Ceremony Worthy of Time</a></h6>
+													<p class="mb-2 small">We help our customers better manage their web presence.</p>
+													<a class="icon-link icon-link-hover stretched-link mb-0" href="portfolio-case-studies-v1.html">Learn more<i class="bi bi-arrow-right"></i> </a>
+												</div>
+											</div>
+										</div>
+
+										<!-- <div class="card bg-transparent">
+											<img src="assets/images/portfolio/list/02.jpg" class="card-img" alt="">
+											<div class="card-body px-0 text-start pb-0">
+												<h6><a href="#">Brushstrokes and Beyond</a></h6>
+												<p class="mb-2 small">We help our customers better manage their web presence.</p>
+												<a class="icon-link icon-link-hover stretched-link mb-0" href="portfolio-case-studies-v2.html">Learn more<i class="bi bi-arrow-right"></i> </a>
+											</div>
+										</div> -->
+
+										<!-- Divider line -->
+										<div class="vr ms-2"></div>
+									</div>
+								</div>
+
+								<!-- Index nav links -->
+								<div class="col-xl-4">
+									<ul class="list-unstyled">
+										<li class="dropdown-header h6">Portfolio Pages</li>
+										
+										<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/api.png">API Development and Integration</a> </li>
+										<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/app.png">App Development</a> </li>
+										<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/web.png">Web Development</a> </li>
+										<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/database.png">Database Dev and Management</a> </li>
+										<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/uiux.png">UI/UX Design</a> </li>
+										<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/api-as-a-service.png">assets/</a> </li>
+										<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/game.png">Game Development</a> </li>
+										<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/webapp.png">Web Applications</a> </li>
+										<!-- <li> <a class="dropdown-item" href="portfolio-masonry.html">Web Development</a> </li>
+										<li> <a class="dropdown-item" href="portfolio-showcase.html">Game Development</a> </li>
+										<li> <a class="dropdown-item" href="portfolio-list.html">App Development</a> </li>
+										<li> <a class="dropdown-item" href="portfolio-case-studies-v1.html">API</a> </li>
+										<li> <a class="dropdown-item" href="portfolio-case-studies-v2.html">Portfolio Case Study v.2</a> </li> -->
+									</ul>
+								</div>
+							</div>
+						</div>
+					</li>
+
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">Others</a>
+						<ul class="dropdown-menu">
+							<!-- Dropdown Multilevel -->
+							<li> 
+								<a class="dropdown-item" href="blog-grid.html">
+									<i class="fa-fw bi bi-journal me-2"></i>Blog
+								</a> 
+							</li>
+							
+							<!-- Dropdown divider -->
+							<li> <hr class="dropdown-divider"></li>
+							<li>
+								<a class="dropdown-item" href="about-v1.html">
+									<i class="fa-fw bi bi-file-earmark-text me-2"></i>About us
+								</a>
+							</li>
+							<li> 
+								<a class="dropdown-item" href="faq.html">
+									<i class="fa-fw bi bi-question-circle me-2"></i>FAQ
+								</a> 
+							</li>
+							<li> 
+								<a class="dropdown-item" href="docs/index.html">
+									<i class="fa-fw bi bi-file-earmark-text me-2"></i>Documentation
+								</a> 
+							</li>
+							<li> 
+								<a class="dropdown-item" href="contact-v1.html">
+									<i class="fa-fw bi bi-envelope me-2"></i>Contact us
+								</a> 
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!-- Main navbar END -->
+
+			<!-- Buttons -->
+			<ul class="nav align-items-center dropdown-hover ms-sm-2">
+				<!-- Dark mode option START -->
+				<li class="nav-item dropdown dropdown-animation">
+					<button class="btn btn-link mb-0 px-2 lh-1" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="bi bi-circle-half theme-icon-active fill-mode fa-fw" viewbox="0 0 16 16">
+						<path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+						<use href="#"></use>
+					</svg>
+					</button>
+
+					<ul class="dropdown-menu min-w-auto dropdown-menu-end" aria-labelledby="bd-theme">
+						<li class="mb-1">
+							<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+								<svg width="16" height="16" fill="currentColor" class="bi bi-brightness-high-fill fa-fw mode-switch me-1" viewbox="0 0 16 16">
+									<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+									<use href="#"></use>
+								</svg>Light
+							</button>
+						</li>
+						<li class="mb-1">
+							<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon-stars-fill fa-fw mode-switch me-1" viewbox="0 0 16 16">
+									<path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+									<path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+									<use href="#"></use>
+								</svg>Dark
+							</button>
+						</li>
+						<li>
+							<button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-half fa-fw mode-switch me-1" viewbox="0 0 16 16">
+									<path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+									<use href="#"></use>
+								</svg>Auto
+							</button>
+						</li>
+					</ul>
+				</li>
+				<!-- Dark mode option END -->
+
+				<!-- Sign up button -->
+				<div id="signupSection">
+					<li class="nav-item me-2 d-none d-sm-block">
+						<a href="sign-in.html" class="btn btn-sm btn-light mb-0"><i class="bi bi-person-circle me-1"></i>Sign in</a>
+					</li>
+				</div>
+
+				<div id="profileSection">
+				<!-- <div> -->
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+							<!-- <i class="bi bi-person-circle bi-2x"></i> -->
+							<div class="avatar">
+								<img class="avatar-img rounded-circle border border-2 border-white" src="assets/images/avatar/05.jpg" alt="">
+							</div>
+							
+						</a>
+						<ul class="dropdown-menu">
+							<div class="card-header text-center border-bottom">
+									<!-- Avatar -->
+									<div class="avatar avatar-xl position-relative mb-2">
+										<img class="avatar-img rounded-circle border border-2 border-white" src="assets/images/avatar/05.jpg" alt="">
+										<a href="#" class="btn btn-sm btn-round btn-dark position-absolute top-50 start-100 translate-middle mt-4 ms-n3" data-bs-toggle="tooltip" data-bs-title="Edit profile">
+												<i class="bi bi-pencil-square"></i>
+										</a>
+									</div>
+									<!-- <h6 class="mb-0"><div id="userDetails">Drago33000</div></h6> -->
+									<h6 class="mb-0"><div class="userDetail" id="userDetail">Drago33000</div></h6>
+									<a href="#" class="text-reset text-primary-hover small"><div id="emailField" class="emailField">hello@gmail.com</div></a>
+							</div>
+							
+							<!-- Dropdown Items -->
+							<li>
+								<a class="dropdown-item" href="account-profile.html">
+									<i class="fa-fw bi bi-person me-2"></i>Profile
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="account-notification.html">
+									<i class="fa-fw bi bi-bell me-2"></i>Notifications
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="account-settings.html">
+									<i class="fa-fw bi bi-gear me-2"></i>Account Settings
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="account-security.html">
+									<i class="fa-fw bi bi-gear me-2"></i>Security
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="account-payment-details.html">
+									<i class="fa-fw bi bi-credit-card me-2"></i>Subscrition & Payments
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="account-projects.html">
+									<i class="fa-fw bi bi-credit-card me-2"></i>Projects
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="billing.html">
+									<i class="fa-fw bi bi-credit-card me-2"></i>Billing
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="help-center.html">
+									<i class="fa-fw bi bi-question-circle me-2"></i>Help Center
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="activity-log.html">
+									<i class="fa-fw bi bi-clock-history me-2"></i>Activity Log
+								</a>
+							</li>
+							<li>
+								<a id="signoutLink" class="dropdown-item" href="#">
+									<i class="fa-fw bi bi-box-arrow-right me-2"></i>Sign out
+								</a>
+							</li>
+						</ul>
+					</li>
+				</div>
+				
+			</ul>
+
+		</div>
+	</nav>
+	<!-- Logo Nav END -->
+</header>
+
+<main>
+
+<!-- =======================
+Content START -->
+<div class="project-details mb-4 mb-sm-2">
+    <div class="cover3">
+        <div class="header-holder">
+            <div class="image-slider">
+                <div class="slides-container">
+                    <!-- <div class="slide">
+                        <img src="assets/images/dummy/1.jpeg" alt="Project Image 1">
+                    </div>
+                    <div class="slide">
+                        <img src="assets/images/dummy/2.jpeg" alt="Project Image 2">
+                    </div> -->
+                    <div class="slide">
+                        <img src="assets/images/dummy/4.jpeg" alt="Project Image 3">
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-7 col-xl-6 mb-6 mb-md-0">
+                <span class="bg-primary bg-opacity-10 text-primary text-uppercase rounded small px-3 py-2">Analytics</span>
+                <h1 class="h2 my-4" id="projectName">Decoy Project Name</h1>
+                <p class="mb-7" id="description">Project description goes here...</p>
+
+                <h6 class="text-white fw-normal mb-4">More than 500+ teams are using Mizzle</h6>
+            </div> -->
+            <div class="col-lg-6 mb-5 mb-sm-8 mb-md-9 mb-lg-0">
+				<!-- Title -->
+				<h1 class="" id="projectName">Decoy Project Name
+					<!-- SVG decoration -->
+					<span class="position-absolute top-0 start-0 translate-middle mt-1 ms-n5">
+						<svg class="fill-primary" width="86" height="105" viewbox="0 0 86 105" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M50.9805 4.63769C51.6165 4.24345 56.4262 10.3524 61.7246 18.1163C67.0564 25.8003 72.7966 35.1061 75.9634 40.6314C82.2158 51.6489 85.8889 61.2748 84.5362 62.0301C83.1029 62.7522 77.2708 54.3462 71.0415 43.3853C67.8986 37.9165 62.7042 28.3199 58.293 20.1246C53.8819 11.9293 50.2874 5.05535 50.9805 4.63769Z"></path>
+							<path d="M64.0889 66.7297C63.5001 67.2372 60.6142 65.1098 57.1179 62.637C53.6451 60.2207 49.5285 57.539 47.2336 56.0303C42.5967 52.8997 39.0022 49.8707 39.6599 48.4069C40.2841 47.0231 45.3294 47.9307 50.3923 51.2838C52.9286 52.892 56.9393 56.2802 59.8742 59.6469C62.809 63.0137 64.6779 66.2223 64.0889 66.7297Z"></path>
+							<path d="M55.1316 86.0595C55.1297 86.856 48.7063 87.4433 40.9853 87.6368C33.2643 87.8295 24.2555 87.492 19.0669 87.0413C8.68981 86.139 0.434871 83.7683 0.656712 82.218C0.878555 80.6685 9.34356 80.5005 19.5833 81.393C24.7149 81.867 33.5706 82.7978 41.1895 83.6415C48.832 84.5408 55.1571 85.32 55.1316 86.0595Z"></path>
+						</svg>
+					</span>
+				</h1>
+				<p class="mb-5">Free to play game still in production.</p>
+				<!-- Download app buttons -->
+				<div class="row g-2 mb-5">
+					<!-- Google play store button -->
+					<!-- <div class="col-6 col-sm-4 col-md-3">
+						<a href="#"> <img src="assets/images/elements/google-play.svg" class="btn-transition" alt="google-store"> </a>
+					</div> -->
+					<!-- App store button -->
+					<!-- <div class="col-6 col-sm-4 col-md-3">
+						<a href="#"> <img src="assets/images/elements/app-store.svg" class="btn-transition" alt="app-store"> </a>
+					</div> -->
+				</div>
+
+				<!-- Global partner -->
+				<div class="d-sm-flex gap-3 align-items-center">
+					<h6 class="mb-3 mb-sm-0">Global Partner:</h6>
+					<ul class="list-inline flex-wrap mb-0">
+						<li class="list-inline-item">
+							<a href="#" class="btn btn-icon btn-lg btn-white bg-primary-hover shadow rounded-circle"><i class="bi bi-android ga-fw"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#" class="btn btn-icon btn-lg btn-white bg-primary-hover shadow rounded-circle"><i class="bi bi-apple ga-fw"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#" class="btn btn-icon btn-lg btn-white bg-primary-hover shadow rounded-circle"><i class="bi bi-slack ga-fw"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#" class="btn btn-icon btn-lg btn-white bg-primary-hover shadow rounded-circle"><i class="bi bi-google ga-fw"></i></a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#" class="btn btn-icon btn-lg btn-white bg-primary-hover shadow rounded-circle"><i class="bi bi-git ga-fw"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+            <!-- <div class="row ms-2">
+                <div class="image-slider">
+                    <div class="slides-container">
+                        <div class="slide">
+                            <img src="assets/images/dummy/1.jpeg" alt="Project Image 1">
+                        </div>
+                        <div class="slide">
+                            <img src="assets/images/dummy/2.jpeg" alt="Project Image 2">
+                        </div>
+                        <div class="slide">
+                            <img src="assets/images/dummy/3.jpeg" alt="Project Image 3">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-xl-6 mb-6 mb-md-0">
+                    <span class="bg-primary bg-opacity-10 text-primary text-uppercase rounded small px-3 py-2">Analytics</span>
+                    <h1 class="h2 my-4">Comprehensive data analytics and reporting</h1>
+                    <p class="mb-7">Gain valuable insights into your digital campaigns with our comprehensive data analytics and reporting feature.</p>
+    
+                    <h6 class="text-white fw-normal mb-4">More than 500+ teams are using Mizzle</h6>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<section class="pb-0">
+	<div class="container">
+		<!-- Title -->
+		<div class="inner-container-small text-center mb-4 mb-sm-5">
+			<h2 class="mb-4">Updates</h2>
+			<p class="mb-0">Updates with the reference tag are not taken from the app</p>
+		</div>
+
+		<!-- Slider START -->
+		<div class="swiper" data-swiper-options='{
+			"spaceBetween": 30,
+			"pagination":{
+				"el":".swiper-pagination"
+			},
+			"breakpoints": {
+				"576": {"slidesPerView": 1}, 
+				"768": {"slidesPerView": 2}, 
+				"992": {"slidesPerView": 3}
+			}}'>
+
+			<!-- Slider items -->
+			<div class="swiper-wrapper">
+				<!-- Step item -->
+				<div class="swiper-slide h-100">
+					<div class="features_item_1 overflow-hidden">
+						<!-- Card body -->
+                        <div class="cover5 p-4 p-sm-5 ">
+                            <div class="card-body p-0 pb-5">
+                                <h5>Shop</h5>
+                                <p class="heading-color">We just finished adding shop to the game and it's been good so far.</p>
+                                <!-- Number -->
+                                <div class="icon-lg bg-dark rounded-circle fw-bold text-white mb-3">01</div>
+
+                                <!-- Buttons -->
+                                <a href="#"><img src="assets/images/elements/android.svg" class="h-30px me-3" alt="icon-img"></a>
+                                <a href="#"><img src="assets/images/elements/microsoft.svg" class="h-30px me-3" alt="icon-img"></a>
+                                <a href="#"><img src="assets/images/elements/apple.svg" class="h-30px" alt="icon-img"></a>
+                            </div>
+
+                            <!-- Card footer -->
+                            <div class="card-footer bg-transparent p-0">
+                                <div class="rotate-335 m-auto mb-n9 me-n5 mt-4" style=" background-size: 100%; width: 280px; height:430px">
+                                    <i></i>
+                                    <b style="left: 5%;"></b>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+				</div>
+
+                <div class="swiper-slide h-100">
+					<div class="features_item_2 overflow-hidden">
+						<!-- Card body -->
+                        <div class="cover5 p-4 p-sm-5 ">
+                            <div class="card-body p-0 pb-5">
+                                <h5>Reference</h5>
+                                <p class="heading-color">Decide to use spider man as a reference for my game character.</p>
+                                <!-- Number -->
+                                <div class="icon-lg bg-dark rounded-circle fw-bold text-white mb-3">01</div>
+                            </div>
+
+                            <!-- Card footer -->
+                            <div class="card-footer bg-transparent p-0">
+                                <div class="rotate-335 m-auto mb-n9 me-n5 mt-4" style=" background-size: 100%; width: 280px; height:430px">
+                                    <i></i>
+                                    <b style="left: 5%;"></b>
+                                </div>
+                            </div>
+                            
+                            <div class="reference_tag">
+                                <span>Reference</span>
+                            </div>
+                        </div>
+					</div>
+				</div>
+
+                <div class="swiper-slide h-100">
+					<div class="features_item_3 overflow-hidden">
+						<!-- Card body -->
+                        <div class="cover5 p-4 p-sm-5 ">
+                            <div class="card-body p-0 pb-5">
+                                <h5>Chests</h5>
+                                <p class="heading-color">Loving the in game chests so far. Thinking of adding more design types for like different levels or areas</p>
+                                <!-- Number -->
+                                <div class="icon-lg bg-dark rounded-circle fw-bold text-white mb-3">01</div>
+
+                                <!-- Buttons -->
+                                <a href="#"><img src="assets/images/elements/android.svg" class="h-30px me-3" alt="icon-img"></a>
+                                <a href="#"><img src="assets/images/elements/microsoft.svg" class="h-30px me-3" alt="icon-img"></a>
+                                <a href="#"><img src="assets/images/elements/apple.svg" class="h-30px" alt="icon-img"></a>
+                            </div>
+
+                            <!-- Card footer -->
+                            <div class="card-footer bg-transparent p-0">
+                                <div class="rotate-335 m-auto mb-n9 me-n5 mt-4" style=" background-size: 100%; width: 280px; height:430px">
+                                    <i></i>
+                                    <b style="left: 5%;"></b>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+				</div>
+			</div>	
+			<!-- Slider Pagination -->
+			<div class="swiper-pagination swiper-pagination-primary position-relative mt-4"></div>
+		</div> <!-- Slider END -->
+	</div>
+</section>
+<section class="pt-sm-7">
+    <div class="cover">
+        <div class="cover2">
+            <div class="container">
+                
+                <div class="main_section">
+                    <div class="cards_holder  mb-4 mb-sm-7">
+                        <div class="tabs_card">
+                            <div class="tabs">
+                                <div class="tabs-bg">
+                                    <button class="tab-link" data-tab="details">Details</button>
+                                    <button class="tab-link active" data-tab="team">Team</button>
+                                    <button class="tab-link" data-tab="skills_tab">Skills</button>
+                                    <button class="tab-link" data-tab="manager">Manager</button>
+                                    <button class="tab-link" data-tab="applicants">Applicants</button>
+                                </div>
+                            </div>
+                        
+                            <div class="tab-content-holder">
+                            </div>
+                            <!-- <div class="tab-content" id="details">
+                                <div class="card">
+                                    <h2>Project Details</h2>
+                                    <p><strong>Project Type:</strong> <span id="projectType">Decoy Project Type</span></p>
+                                    <p><strong>Tags:</strong> <span id="tags">Decoy Tags</span></p>
+                                    <p><strong>Budget:</strong> <span id="budget">$100,000</span></p>
+                                    <p><strong>Skills:</strong> <span id="skills">JavaScript, HTML, CSS</span></p>
+                                    <p><strong>Visibility:</strong> <span id="visibility">Public</span></p>
+                                    <p><strong>Attachments:</strong> <span id="attachments">None</span></p>
+                                </div>
+                            </div> -->
+
+                            <div class="tab-content" id="details">
+                                <div class="content-container p-4 pt-0">
+                                    <div class="divider"></div>
+                                    
+                                    <div class="accordion-body mt-3 pb-0">
+                                        <div class="" id="description">Decoy description</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+            
+                            <div class="tab-content" id="skills_tab">
+                                <div class="content-container p-4 pt-0">
+                                    <div class="divider"></div>
+                                    <ul class="list-group list-group-borderless mb-4 skills-list" id="skills-list"></ul>
+                                </div>
+                            </div>
+                        
+                            <!-- <div class="tab-content" id="skills_tab">
+                                <div class="card">
+                                    <h2>Project Details</h2>
+                                    <p><strong>Project Type:</strong> <span id="projectType">Decoy Project Type</span></p>
+                                    <p><strong>Tags:</strong> <span id="tags">Decoy Tags</span></p>
+                                    <p><strong>Budget:</strong> <span id="budget">$100,000</span></p>
+                                    <p><strong>Skills:</strong> <span id="skills">JavaScript, HTML, CSS</span></p>
+                                    <p><strong>Visibility:</strong> <span id="visibility">Public</span></p>
+                                    <p><strong>Attachments:</strong> <span id="attachments">None</span></p>
+                                </div>
+                            </div> -->
+                        
+                            <div class="tab-content" id="team">
+                                <div class="content-container p-4 pt-0">
+                                    <div class="divider"></div>
+                                    <div class="user-card">
+                                        <div class="d-md-flex align-items-md-center flex-md-row">
+                                            <div class="me-1">
+                                                <img src="assets/images/auth/03.jpg" alt="Avatar" class="avatar_icon me-5 bs-success" width="100" height="100">
+                                            </div>
+                                            <div>
+                                                <div class="client mb-2">client</div>
+                                                <h6 class="mb-0"><a href="career-single.html" class="bs-black">John Doe</a></h6>
+                                                <p>Email: johndoe@example.com</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <a href="#" class="btn btn-primary mb-1">Invite<i class="bi bi-arrow-right ms-2"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="btn btn-info mb-0">Info<i class="bi bi-arrow-right ms-2"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="divider"></div>
+                        
+                                    <div class="user-card d-md-flex justify-content-md-between align-items-md-center flex-md-row p-4 mb-3">
+                                        <div class="d-md-flex align-items-md-center flex-md-row">
+                                            <div class="me-1">
+                                                <img src="assets/images/auth/03.jpg" alt="Avatar" class="avatar_icon me-5 bs-success" width="100" height="100">
+                                            </div>
+                                            <div>
+                                                <div class="developer mb-2">Developer</div>
+                                                <h6 class="mb-0"><a href="career-single.html" class="bs-black">John Doe</a></h6>
+                                                <p>Email: johndoe@example.com</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <a href="#" class="btn btn-primary mb-1">Invite<i class="bi bi-arrow-right ms-2"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="btn btn-info mb-0">Info<i class="bi bi-arrow-right ms-2"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="divider"></div>
+                        
+                                    <div class="user-card d-md-flex justify-content-md-between align-items-md-center flex-md-row p-4 mb-3">
+                                        <div class="d-md-flex align-items-md-center flex-md-row">
+                                            <div class="me-1">
+                                                <img src="assets/images/auth/03.jpg" alt="Avatar" class="avatar_icon me-5 bs-success" width="100" height="100">
+                                            </div>
+                                            <div>
+                                                <div class="developer mb-2">Developer</div>
+                                                <h6 class="mb-0"><a href="career-single.html" class="bs-black">John Doe</a></h6>
+                                                <p>Email: johndoe@example.com</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <a href="#" class="btn btn-primary mb-1">Invite<i class="bi bi-arrow-right ms-2"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="btn btn-info mb-0">Info<i class="bi bi-arrow-right ms-2"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="divider"></div>
+                        
+                                    <div class="user-card d-md-flex justify-content-md-between align-items-md-center flex-md-row p-4 mb-3">
+                                        <div class="d-md-flex align-items-md-center flex-md-row">
+                                            <div class="me-1">
+                                                <img src="assets/images/auth/03.jpg" alt="Avatar" class="avatar_icon me-5 bs-success" width="100" height="100">
+                                            </div>
+                                            <div>
+                                                <div class="developer mb-2">Developer</div>
+                                                <h6 class="mb-0"><a href="career-single.html" class="bs-black">John Doe</a></h6>
+                                                <p>Email: johndoe@example.com</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <a href="#" class="btn btn-primary mb-1">Invite<i class="bi bi-arrow-right ms-2"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="btn btn-info mb-0">Info<i class="bi bi-arrow-right ms-2"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="divider"></div>
+                        
+                                    <div class="user-card d-md-flex justify-content-md-between align-items-md-center flex-md-row p-4 mb-3">
+                                        <div class="d-md-flex align-items-md-center flex-md-row">
+                                            <div class="me-1">
+                                                <img src="assets/images/auth/03.jpg" alt="Avatar" class="avatar_icon me-5 bs-success" width="100" height="100">
+                                            </div>
+                                            <div>
+                                                <div class="developer mb-2">Developer</div>
+                                                <h6 class="mb-0"><a href="career-single.html" class="bs-black">John Doe</a></h6>
+                                                <p>Email: johndoe@example.com</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <a href="#" class="btn btn-primary mb-1">Invite<i class="bi bi-arrow-right ms-2"></i></a>
+                                            </div>
+                                            <div>
+                                                <a href="#" class="btn btn-info mb-0">Info<i class="bi bi-arrow-right ms-2"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content" id="applicants">
+                                <div class="content-container p-4 pt-0">
+                                    <div class="divider"></div>
+                                    <div id="applicant-list">
+                                        <!-- Add applicant cards as needed -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="bg-light p-4 rounded-3">
+                                <div class="progress_video">
+                                    <!-- <video id="projectVideo" controls>
+                                        <source id="videoSource" src="https://youtu.be/qp2OY9L_qpk" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video> -->
+                                    <div id="videoContainer">
+                                        <iframe id="projectVideo" width="100%" height="250" src="https://www.youtube.com/embed/qp2OY9L_qpk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <div id="noVideoMessage">No video uploaded</div>
+                                </div>
+                                <div class="progress_bar_container">
+                                    <label for="progressBar">Progress:</label>
+                                    <div class="progress">
+                                        <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                    </div>
+                                </div>
+                                <div class="status_tag">
+                                    <p><strong>Status:</strong> <span id="statusTag" class="badge badge-secondary">Not shared</span></p>
+                                </div>
+                                <div class="video_platform">
+                                    <p><strong>Platform:</strong> <span id="videoPlatform">Not shared</span></p>
+                                </div>
+                                <div class="contact_details">
+                                    <p><strong>Contact:</strong></p>
+                                    <p>Email: example@example.com</p>
+                                    <p>Phone: +1234567890</p>
+                                </div>
+                                <div class="social_icons">
+                                    <a href="#" data-toggle="modal" data-target="#socialMediaModal"><i class="fab fa-facebook"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#socialMediaModal"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#socialMediaModal"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="inner-container-small text-center">
+                        <span class="bg-primary bg-opacity-10 text-primary text-uppercase rounded small px-3 py-2">snapshots</span>
+                    </div>
+                    
+                    <!-- <div class="gallery">
+                        <div class="gallery-container">
+                            <img class="gallery-item gallery-item-1" src="assets/images/dummy/1.jpeg" alt="Image 4" data-index="1">
+                            <img class="gallery-item gallery-item-2" src="assets/images/dummy/2.jpeg" alt="Image 4" data-index="2">
+                            <img class="gallery-item gallery-item-3" src="assets/images/dummy/3.jpeg" alt="Image 4" data-index="3">
+                            <img class="gallery-item gallery-item-4" src="assets/images/dummy/4.jpeg" alt="Image 4" data-index="4">
+                            <img class="gallery-item gallery-item-5" src="assets/images/dummy/5.jpeg" alt="Image 4" data-index="5">
+                        </div>
+                        <div class="gallery-controls"></div>
+                    </div> -->
+
+                    <!-- <div class="gallery">
+                        <div class="gallery-container">
+                            <img class="gallery-item gallery-item-1" src="assets/images/dummy/1.jpeg" alt="Image 1" data-index="1">
+                            <img class="gallery-item gallery-item-2" src="assets/images/dummy/2.jpeg" alt="Image 2" data-index="2">
+                            <img class="gallery-item gallery-item-3" src="assets/images/dummy/3.jpeg" alt="Image 3" data-index="3">
+                            <img class="gallery-item gallery-item-4" src="assets/images/dummy/4.jpeg" alt="Image 4" data-index="4">
+                            <img class="gallery-item gallery-item-5" src="assets/images/dummy/5.jpeg" alt="Image 5" data-index="5">
+                        </div>
+                        <div class="gallery-controls">
+                        </div>
+                    </div> -->
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <!-- Title -->
+        <div class="inner-container-small text-center mb-4 mb-sm-5">
+            <h2 class="mb-0">Team comments</h2>
+        </div>
+
+        <div class="row row-cols-sm-2 row-cols-lg-3 g-4 g-lg-5" data-isotope='{"layoutMode": "masonry"}'>
+            <!-- Item -->
+            <div class="col">
+                <div class="card card-body border">
+                    <p class="mb-2">The past 3 months has been insane progress all through.”</p>
+                    <!-- Avatar -->
+                    <div class="d-flex align-items-center">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xs me-2">
+                            <img class="rounded-circle" src="assets/images/avatar/roland-cousins-3GTHyh2lo9o-unsplash.jpg" alt="avatar">
+                        </div>
+                        <!-- Info -->
+                        <small class="mb-0 heading-color fw-semibold">Jack Adams</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+                <div class="card card-body border">
+                    <p class="mb-2">Told you all this is gonna be a blast. Just wait till u see the game here in testing!”</p>
+                    <!-- Avatar -->
+                    <div class="d-flex align-items-center">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xs me-2">
+                            <img class="rounded-circle" src="assets/images/avatar/susanna-marsiglia-CZwXvMhFLk8-unsplash.jpg" alt="avatar">
+                        </div>
+                        <!-- Info -->
+                        <small class="mb-0 heading-color fw-semibold">James Anderson</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+                <div class="card card-body border">
+                    <p class="mb-2">“Got to tone down some of the effects though. Those who attended the alpha test would know what I mean.”</p>
+                    <!-- Avatar -->
+                    <div class="d-flex align-items-center">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xs me-2">
+                            <img class="rounded-circle" src="assets/images/avatar/poseDefiner.png" alt="avatar">
+                        </div>
+                        <!-- Info -->
+                        <small class="mb-0 heading-color fw-semibold">James Darwin</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+                <div class="card card-body border">
+                    <p class="mb-2">“Finally some actual progress, I'm definitely going to die with all this drawings.”</p>
+                    <!-- Avatar -->
+                    <div class="d-flex align-items-center">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xs me-2">
+                            <img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt="avatar">
+                        </div>
+                        <!-- Info -->
+                        <small class="mb-0 heading-color fw-semibold">Carolyn Ortiz</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+                <div class="card card-body border">
+                    <p class="mb-2">“...”</p>
+                    <!-- Avatar -->
+                    <div class="d-flex align-items-center">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xs me-2">
+                            <img class="avatar-img rounded-circle" src="assets/images/avatar/07.jpg" alt="avatar">
+                        </div>
+                        <!-- Info -->
+                        <small class="mb-0 heading-color fw-semibold">Dennis Barrett</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+                <div class="card card-body border">
+                    <p class="mb-2">“Really cool how we went from basic characters to this. I won't be working much for sometime anyways, weeding coming up ;)”</p>
+                    <!-- Avatar -->
+                    <div class="d-flex align-items-center">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xs me-2">
+                            <img class="rounded-circle" src="assets/images/avatar/10.jpg" alt="avatar">
+                        </div>
+                        <!-- Info -->
+                        <small class="mb-0 heading-color fw-semibold">Tammy Anderson</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+                <div class="card card-body border">
+                    <p class="mb-2">“Nice”</p>
+                    <!-- Avatar -->
+                    <div class="d-flex align-items-center">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xs me-2">
+                            <img class="avatar-img rounded-circle" src="assets/images/avatar/08.jpg" alt="avatar">
+                        </div>
+                        <!-- Info -->
+                        <small class="mb-0 heading-color fw-semibold">Joan Wallace</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item -->
+            <div class="col">
+                <div class="card card-body border">
+                    <p class="mb-2">“Just so you know, I did the eyes not Tammy!”</p>
+                    <!-- Avatar -->
+                    <div class="d-flex align-items-center">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xs me-2">
+                            <img class="avatar-img rounded-circle" src="assets/images/avatar/11.jpg" alt="avatar">
+                        </div>
+                        <!-- Info -->
+                        <small class="mb-0 heading-color fw-semibold">Jacqueline Miller</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <h2>Comments</h2>
+            <form id="commentForm">
+                <div class="form-group">
+                    <label for="commentText">Comment:</label>
+                    <textarea id="commentText" class="form-control" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Comment</button>
+            </form>
+            <div id="commentsList">
+                <!-- Comments will be dynamically added here -->
+                <div class="comment">
+                    <span class="upvote" onclick="upvoteComment(this)">&#x1F44D;</span>
+                    <div class="comment-text">
+                        <p>Last month project display is still blowing my mind.</p>
+                        <small class="upvote-count">2.3k</small>
+                    </div>
+                </div>
+                <div class="comment">
+                    <span class="upvote" onclick="upvoteComment(this)">&#x1F44D;</span>
+                    <div class="comment-text">
+                        <p>Great project keep it up.</p>
+                        <small class="upvote-count">3.5k</small>
+                    </div>
+                </div>
+                <div class="comment">
+                    <span class="upvote" onclick="upvoteComment(this)">&#x1F44D;</span>
+                    <div class="comment-text">
+                        <p>I was here from the beginning!</p>
+                        <small class="upvote-count">700</small>
+                    </div>
+                </div>
+                <div class="comment">
+                    <span class="upvote" onclick="upvoteComment(this)">&#x1F44D;</span>
+                    <div class="comment-text">
+                        <p>The progress on this is insane. I think I am going to get back into programming</p>
+                        <small class="upvote-count">1k</small>
+                    </div>
+                </div>
+                <div class="comment">
+                    <span class="upvote" onclick="upvoteComment(this)">&#x1F44D;</span>
+                    <div class="comment-text">
+                        <p>I was here from the beginning!</p>
+                        <small class="upvote-count">9</small>
+                    </div>
+                </div>
+                <div class="comment">
+                    <span class="upvote" onclick="upvoteComment(this)">&#x1F44D;</span>
+                    <div class="comment-text">
+                        <p>I was here from the beginning!</p>
+                        <small class="upvote-count">1</small>
+                    </div>
+                </div>
+                <div class="comment">
+                    <span class="upvote" onclick="upvoteComment(this)">&#x1F44D;</span>
+                    <div class="comment-text">
+                        <p>I was here from the beginning!</p>
+                        <small class="upvote-count">52</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section>
+<!-- =======================
+Content END -->
+
+
+<!-- Social Media Modal -->
+<div class="modal fade" id="socialMediaModal" tabindex="-1" aria-labelledby="socialMediaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="socialMediaModalLabel">Social Madfsdfsdfzedia Links</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Facebook:</strong> <a href="https://www.facebook.com/yourprofile" target="_blank">Visit Profile</a> | <button class="btn btn-secondary btn-sm" onclick="copyToClipboard('https://www.facebook.com/yourprofile')">Copy Link</button></p>
+                <p><strong>Twitter:</strong> <a href="https://www.twitter.com/yourprofile" target="_blank">Visit Profile</a> | <button class="btn btn-secondary btn-sm" onclick="copyToClipboard('https://www.twitter.com/yourprofile')">Copy Link</button></p>
+                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/yourprofile" target="_blank">Visit Profile</a> | <button class="btn btn-secondary btn-sm" onclick="copyToClipboard('https://www.linkedin.com/yourprofile')">Copy Link</button></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</main>
+
+<script src="assets/js/project/myProjectDetails.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<!--Vendors-->
+<script src="assets/vendor/purecounterjs/dist/purecounter_vanilla.js"></script>
+<script src="assets/vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<script src="assets/vendor/glightbox/js/glightbox.js"></script>
+
+<!-- Theme Functions -->
+<script src="assets/js/functions.js"></script>
+
+<script>
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+            alert('Link copied to clipboard');
+        }, function(err) {
+            console.error('Could not copy text: ', err);
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,16 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const graphqlEndpoint = 'http://localhost:3001/graphql';
-
-    const Sign_In = `
-        query SignIn($email: String!, $password: String!) {
-            signIn(email: $email, password: $password) {
-                first_name
-                middle_name
-                last_name
-                email
-            }
-        }
-    `;
+    const apiEndpoint = 'http://localhost:3001/api/users/signin';
 
     document.getElementById('signinForm').addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -21,30 +10,28 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch(graphqlEndpoint, {
+            const response = await fetch(apiEndpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    query: Sign_In,
-                    variables: formData,
-                }),
+                body: JSON.stringify(formData),
             });
 
             const result = await response.json();
 
-            if (result.errors) {
-                console.error('Error signing in:', result.errors);
-                alert(result.errors[0].message); // Display the error message to the user
-            } else {
-                console.log('User signed in:', result.data.signIn);
+            if (response.ok) {
+                console.log('User signed in:', result);
 
                 // Save user details to localStorage
-                localStorage.setItem('user', JSON.stringify(result.data.signIn));
+                localStorage.setItem('user', JSON.stringify(result.data, result));
+                localStorage.setItem('authToken', JSON.stringify(result.token));
 
                 // Handle success (e.g., redirect to a welcome page or dashboard)
-                window.location.href = '/index.html'; // Replace with your actual page
+                window.location.href = 'index.html';
+            } else {
+                console.error('Error signing in:', result.message);
+                alert(result.message); // Display the error message to the user
             }
         } catch (error) {
             console.error('Error signing in:', error);

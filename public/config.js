@@ -1,0 +1,2 @@
+AUTH_URL = "https://api.videosdk.live/v2/auths";
+TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiIwZmU3NzA3My1iMDBiLTQ1YWYtOWFmMC0zZjM4ZmNjN2UzMTgiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIiwiYWxsb3dfbW9kIl0sInJvbGVzIjpbImNyYXdsZXIiLCJydGMiXSwiaWF0IjoxNzc3OTc3MDE2LCJleHAiOjE4MDk1MzQ2MTZ9.pf-nerBtOg6e1jlsDt1ekoDoUFR0f8lIDvenpLH6sa4";

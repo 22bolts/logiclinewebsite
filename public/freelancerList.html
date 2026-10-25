@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>EverythingCodes — Find a Freelancer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS -->
+  <link rel="stylesheet" href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/chat/chat.css">
+
+  <style>
+    /* ══════════════════════════════════════
+       TOKENS
+    ══════════════════════════════════════ */
+    :root {
+      --ec-bg:        #f5f4f0;
+      --ec-surface:   #ffffff;
+      --ec-dark:      #0f0f10;
+      --ec-ink:       #1a1a1d;
+      --ec-muted:     #6b6977;
+      --ec-border:    #e4e2dc;
+      --ec-accent:    #1a1a1d;
+      --ec-highlight: #c8f135;   /* lime punch */
+      --ec-tag-bg:    #f0efe9;
+      --ec-tag-ink:   #3d3b45;
+      --ec-radius:    14px;
+      --ec-radius-sm: 8px;
+      --ec-shadow:    0 2px 16px rgba(0,0,0,0.06);
+      --ec-shadow-lg: 0 8px 40px rgba(0,0,0,0.10);
+      --font-head:    'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--ec-bg);
+      color: var(--ec-ink);
+      min-height: 100vh;
+    }
+
+    /* ══════════════════════════════════════
+       PAGE HEADER HERO
+    ══════════════════════════════════════ */
+    .fl-hero {
+      background: var(--ec-dark);
+      padding: 120px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fl-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(200,241,53,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(200,241,53,0.06) 0%, transparent 60%);
+    }
+
+    .fl-hero .container { position: relative; z-index: 1; }
+
+    .fl-hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,241,53,0.12);
+      border: 1px solid rgba(200,241,53,0.25);
+      color: var(--ec-highlight);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 40px;
+      margin-bottom: 20px;
+    }
+
+    .fl-hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .fl-hero h1 em {
+      font-style: normal;
+      color: var(--ec-highlight);
+    }
+
+    .fl-hero p {
+      color: rgba(255,255,255,0.55);
+      font-size: 16px;
+      max-width: 480px;
+      line-height: 1.65;
+    }
+
+    /* Search bar in hero */
+    .fl-search-bar {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50px;
+      padding: 6px 6px 6px 20px;
+      margin-top: 32px;
+      max-width: 560px;
+      backdrop-filter: blur(8px);
+    }
+
+    .fl-search-bar input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 15px;
+    }
+
+    .fl-search-bar input::placeholder { color: rgba(255,255,255,0.35); }
+
+    .fl-search-bar button {
+      background: var(--ec-highlight);
+      color: var(--ec-dark);
+      border: none;
+      border-radius: 40px;
+      padding: 10px 22px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .fl-search-bar button:hover { opacity: 0.88; }
+
+    /* Stats row */
+    .fl-stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .fl-stat { color: rgba(255,255,255,0.9); }
+    .fl-stat strong {
+      display: block;
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--ec-highlight);
+      line-height: 1;
+    }
+    .fl-stat span { font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: 0.04em; text-transform: uppercase; }
+
+    /* ══════════════════════════════════════
+       MAIN LAYOUT
+    ══════════════════════════════════════ */
+    .fl-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 28px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    @media (max-width: 960px) {
+      .fl-layout { grid-template-columns: 1fr; }
+      .fl-sidebar { display: none; }
+      .fl-sidebar.open { display: block; }
+    }
+
+    /* ══════════════════════════════════════
+       SIDEBAR FILTER
+    ══════════════════════════════════════ */
+    .fl-sidebar {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+    }
+
+    .fl-filter-card {
+      background: var(--ec-surface);
+      border: 1px solid var(--ec-border);
+      border-radius: var(--ec-radius);
+      padding: 24px;
+      box-shadow: var(--ec-shadow);
+    }
+
+    .fl-filter-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .fl-filter-head h6 {
+      font-family: var(--font-head);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ec-ink);
+    }
+
+    .fl-filter-reset {
+      background: none;
+      border: none;
+      color: var(--ec-muted);
+      font-family: var(--font-body);
+      font-size: 12px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .fl-filter-reset:hover { background: var(--ec-tag-bg); color: var(--ec-ink); }
+
+    .fl-filter-section { margin-bottom: 24px; }
+
+    .fl-filter-section + .fl-filter-section {
+      padding-top: 20px;
+      border-top: 1px solid var(--ec-border);
+    }
+
+    .fl-filter-label {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ec-muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* Rate slider */
+    .fl-rate-display {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .fl-rate-display span {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ec-ink);
+    }
+
+    .fl-rate-display .rate-val {
+      background: var(--ec-highlight);
+      color: var(--ec-dark);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    input[type="range"].fl-range {
+      width: 100%;
+      height: 4px;
+      appearance: none;
+      background: linear-gradient(to right, var(--ec-dark) 0%, var(--ec-dark) var(--pct, 50%), var(--ec-border) var(--pct, 50%), var(--ec-border) 100%);
+      border-radius: 4px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"].fl-range::-webkit-slider-thumb {
+      appearance: none;
+      width: 18px; height: 18px;
+      background: var(--ec-dark);
+      border: 3px solid var(--ec-highlight);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    input[type="range"].fl-range::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+    /* Chip toggles */
+    .fl-chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .fl-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 12px;
+      border-radius: 40px;
+      border: 1.5px solid var(--ec-border);
+      background: transparent;
+      color: var(--ec-muted);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .fl-chip:hover { border-color: var(--ec-ink); color: var(--ec-ink); }
+
+    .fl-chip.active {
+      background: var(--ec-dark);
+      border-color: var(--ec-dark);
+      color: var(--ec-highlight);
+    }
+
+    /* Skills search in filter */
+    .fl-skill-search {
+      width: 100%;
+      border: 1.5px solid var(--ec-border);
+      border-radius: var(--ec-radius-sm);
+      padding: 8px 12px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--ec-ink);
+      outline: none;
+      margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+
+    .fl-skill-search:focus { border-color: var(--ec-ink); }
+
+    .fl-skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    .fl-skill-list::-webkit-scrollbar { width: 4px; }
+    .fl-skill-list::-webkit-scrollbar-track { background: transparent; }
+    .fl-skill-list::-webkit-scrollbar-thumb { background: var(--ec-border); border-radius: 4px; }
+
+    /* Status dots */
+    .fl-status-opts { display: flex; flex-direction: column; gap: 8px; }
+
+    .fl-status-opt {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: var(--ec-radius-sm);
+      transition: background 0.15s;
+    }
+
+    .fl-status-opt:hover { background: var(--ec-tag-bg); }
+
+    .fl-status-opt input[type="checkbox"] { display: none; }
+
+    .fl-status-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 2px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .fl-status-opt.checked .fl-status-dot { border-color: currentColor; }
+    .fl-status-dot.available { background: #23d160; }
+    .fl-status-dot.busy      { background: #ff9f43; }
+
+    .fl-status-opt span { font-size: 13px; color: var(--ec-ink); flex: 1; }
+    .fl-status-count { font-size: 11px; color: var(--ec-muted); background: var(--ec-tag-bg); padding: 2px 7px; border-radius: 10px; }
+
+    /* Apply button */
+    .fl-apply-btn {
+      width: 100%;
+      background: var(--ec-dark);
+      color: var(--ec-highlight);
+      border: none;
+      border-radius: var(--ec-radius-sm);
+      padding: 12px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: opacity 0.2s;
+    }
+
+    .fl-apply-btn:hover { opacity: 0.85; }
+
+    /* ══════════════════════════════════════
+       CONTENT AREA — TOOLBAR + LIST
+    ══════════════════════════════════════ */
+    .fl-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .fl-count {
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ec-ink);
+    }
+
+    .fl-count span { color: var(--ec-muted); font-weight: 400; }
+
+    .fl-sort {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .fl-sort-label { font-size: 12px; color: var(--ec-muted); }
+
+    .fl-sort select {
+      border: 1.5px solid var(--ec-border);
+      border-radius: var(--ec-radius-sm);
+      padding: 7px 12px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--ec-ink);
+      background: var(--ec-surface);
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Mobile filter toggle */
+    .fl-mobile-filter-btn {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: var(--ec-surface);
+      border: 1.5px solid var(--ec-border);
+      border-radius: var(--ec-radius-sm);
+      padding: 8px 16px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--ec-ink);
+      cursor: pointer;
+    }
+
+    @media (max-width: 960px) { .fl-mobile-filter-btn { display: flex; } }
+
+    /* ══════════════════════════════════════
+       FREELANCER CARDS
+    ══════════════════════════════════════ */
+    #freelancersList {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .fl-card {
+      background: var(--ec-surface);
+      border: 1px solid var(--ec-border);
+      border-radius: var(--ec-radius);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 20px;
+      align-items: start;
+      box-shadow: var(--ec-shadow);
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+      animation: cardIn 0.35s ease both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fl-card:hover {
+      box-shadow: var(--ec-shadow-lg);
+      border-color: rgba(0,0,0,0.12);
+      transform: translateY(-2px);
+    }
+
+    /* Avatar */
+    .fl-avatar-wrap { position: relative; flex-shrink: 0; }
+
+    .fl-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--ec-border);
+      display: block;
+    }
+
+    .fl-online-dot {
+      position: absolute;
+      bottom: 3px; right: 3px;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      border: 2px solid var(--ec-surface);
+    }
+
+    .fl-online-dot.available { background: #23d160; }
+    .fl-online-dot.busy      { background: #ff9f43; }
+    .fl-online-dot.offline   { background: #aaa; }
+
+    /* Info */
+    .fl-info { min-width: 0; }
+
+    .fl-name-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .fl-name {
+      font-family: var(--font-head);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ec-ink);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .fl-name:hover { color: var(--ec-muted); }
+
+    .fl-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #0a7aff;
+      background: rgba(10,122,255,0.08);
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    .fl-tagline {
+      font-size: 13px;
+      color: var(--ec-muted);
+      margin-bottom: 10px;
+      line-height: 1.5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Meta row */
+    .fl-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--ec-muted);
+      margin-bottom: 14px;
+    }
+
+    .fl-meta i { margin-right: 4px; }
+
+    .fl-meta .rate {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--ec-ink);
+    }
+
+    /* Stars */
+    .fl-stars { display: flex; align-items: center; gap: 2px; color: #f5a623; font-size: 12px; }
+    .fl-stars span { color: var(--ec-muted); font-size: 11px; margin-left: 4px; }
+
+    /* Skill tags */
+    .fl-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .fl-skill-tag {
+      background: var(--ec-tag-bg);
+      color: var(--ec-tag-ink);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--ec-border);
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .fl-skill-tag:hover { background: var(--ec-dark); color: var(--ec-highlight); border-color: var(--ec-dark); }
+
+    /* Actions */
+    .fl-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 120px;
+      align-items: flex-end;
+    }
+
+    .fl-btn-chat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--ec-dark);
+      color: var(--ec-highlight);
+      border: none;
+      border-radius: var(--ec-radius-sm);
+      padding: 10px 18px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s, transform 0.15s;
+      text-decoration: none;
+    }
+
+    .fl-btn-chat:hover { opacity: 0.85; transform: scale(1.02); color: var(--ec-highlight); }
+
+    .fl-btn-info {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      color: var(--ec-ink);
+      border: 1.5px solid var(--ec-border);
+      border-radius: var(--ec-radius-sm);
+      padding: 9px 18px;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+
+    .fl-btn-info:hover { border-color: var(--ec-ink); background: var(--ec-tag-bg); }
+
+    /* Status badge on action side */
+    .fl-status-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .fl-status-badge.available { background: rgba(35,209,96,0.1); color: #1aae5a; }
+    .fl-status-badge.busy      { background: rgba(255,159,67,0.12); color: #c47d00; }
+    .fl-status-badge.offline   { background: var(--ec-tag-bg); color: var(--ec-muted); }
+
+    /* Responsive card */
+    @media (max-width: 640px) {
+      .fl-card { grid-template-columns: auto 1fr; }
+      .fl-actions { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; }
+    }
+
+    /* ══════════════════════════════════════
+       EMPTY / LOADING STATES
+    ══════════════════════════════════════ */
+    .fl-skeleton {
+      background: linear-gradient(90deg, var(--ec-tag-bg) 25%, var(--ec-border) 50%, var(--ec-tag-bg) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes shimmer { to { background-position: -200% 0; } }
+
+    .fl-empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--ec-muted);
+    }
+
+    .fl-empty i { font-size: 3rem; display: block; margin-bottom: 16px; opacity: 0.3; }
+    .fl-empty h5 { font-family: var(--font-head); color: var(--ec-ink); margin-bottom: 8px; }
+    .fl-empty p  { font-size: 14px; }
+
+    /* ══════════════════════════════════════
+       ACTIVE FILTERS BAR
+    ══════════════════════════════════════ */
+    .fl-active-filters {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .fl-active-filters:empty { display: none; }
+
+    .fl-active-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--ec-dark);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      animation: tagIn 0.2s ease;
+    }
+
+    @keyframes tagIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    .fl-active-tag button {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      font-size: 12px;
+    }
+
+    .fl-active-tag button:hover { color: #fff; }
+  </style>
+</head>
+
+<body>
+  <script src="assets/js/userDetails.js"></script>
+
+  <!-- ── NAVBAR (reuse existing) ── -->
+  <header class="header-sticky header-absolute">
+    <nav class="navbar navbar-expand-xl">
+      <div class="container">
+        <a class="navbar-brand me-0" href="index.html">
+          <img class="light-mode-item navbar-brand-item" src="assets/images/ec_logo-dark.png" alt="logo">
+          <img class="dark-mode-item navbar-brand-item" src="assets/images/ec_logo-bright.png" alt="logo">
+        </a>
+        <div class="navbar-collapse collapse" id="navbarCollapse">
+          <ul class="navbar-nav navbar-nav-scroll dropdown-hover mx-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link active" href="freelancerList.html">Freelancers</a></li>
+            <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+          </ul>
+        </div>
+        <ul class="nav align-items-center ms-sm-2">
+          <div id="signupSection">
+            <li class="nav-item me-2 d-none d-sm-block">
+              <a href="sign-in.html" class="btn btn-sm btn-light mb-0"><i class="bi bi-person-circle me-1"></i>Sign in</a>
+            </li>
+          </div>
+          <div id="profileSection">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                <div class="avatar"><img class="avatar-img rounded-circle border border-2 border-white" src="assets/images/avatar/05.jpg" alt=""></div>
+              </a>
+              <ul class="dropdown-menu">
+                <div class="card-header text-center border-bottom">
+                  <div class="avatar avatar-xl position-relative mb-2">
+                    <img class="avatar-img rounded-circle border border-2 border-white" src="assets/images/avatar/05.jpg" alt="">
+                  </div>
+                  <h6 class="mb-0"><div class="userDetail" id="userDetail">User</div></h6>
+                  <a href="#" class="text-reset text-primary-hover small"><div id="emailField" class="emailField"></div></a>
+                </div>
+                <li><a class="dropdown-item" href="account-profile.html"><i class="fa-fw bi bi-person me-2"></i>Profile</a></li>
+                <li><a id="signoutLink" class="dropdown-item" href="#"><i class="fa-fw bi bi-box-arrow-right me-2"></i>Sign out</a></li>
+              </ul>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="fl-hero">
+    <div class="container">
+      <div class="fl-hero-label">
+        <i class="bi bi-lightning-charge-fill"></i>
+        Talent on Demand
+      </div>
+      <h1>Find <em>Exceptional</em><br>Freelancers</h1>
+      <p>Connect with verified developers, designers, and specialists ready to bring your ideas to life.</p>
+
+      <div class="fl-search-bar">
+        <i class="bi bi-search" style="color:rgba(255,255,255,0.4); margin-right:10px;"></i>
+        <input type="text" id="heroSearch" placeholder="Search by name, skill, or specialty…">
+        <button onclick="applyHeroSearch()">Search</button>
+      </div>
+
+      <div class="fl-stats">
+        <div class="fl-stat">
+          <strong id="statTotal">—</strong>
+          <span>Freelancers</span>
+        </div>
+        <div class="fl-stat">
+          <strong>98%</strong>
+          <span>Satisfaction</span>
+        </div>
+        <div class="fl-stat">
+          <strong id="statAvail">—</strong>
+          <span>Available Now</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MAIN LAYOUT ── -->
+  <div class="fl-layout">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="fl-sidebar" id="flSidebar">
+      <div class="fl-filter-card">
+        <div class="fl-filter-head">
+          <h6>Filters</h6>
+          <button class="fl-filter-reset" onclick="resetFilters()">Clear all</button>
+        </div>
+
+        <!-- Hourly Rate -->
+        <div class="fl-filter-section">
+          <span class="fl-filter-label">Hourly Rate</span>
+          <div class="fl-rate-display">
+            <span>$0</span>
+            <span class="rate-val" id="rateDisplay">≤ $200/hr</span>
+          </div>
+          <input type="range" class="fl-range" id="rateRange" min="0" max="500" value="200"
+                 oninput="updateRateDisplay(this.value)">
+        </div>
+
+        <!-- Availability -->
+        <div class="fl-filter-section">
+          <span class="fl-filter-label">Availability</span>
+          <div class="fl-status-opts">
+            <label class="fl-status-opt" id="opt-available">
+              <input type="checkbox" value="available" onchange="toggleStatus(this)">
+              <span class="fl-status-dot available"></span>
+              <span>Available</span>
+              <span class="fl-status-count" id="cnt-available">—</span>
+            </label>
+            <label class="fl-status-opt" id="opt-busy">
+              <input type="checkbox" value="busy" onchange="toggleStatus(this)">
+              <span class="fl-status-dot busy"></span>
+              <span>Busy</span>
+              <span class="fl-status-count" id="cnt-busy">—</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Experience Level -->
+        <div class="fl-filter-section">
+          <span class="fl-filter-label">Experience</span>
+          <div class="fl-chip-group" id="expChips">
+            <button class="fl-chip" onclick="toggleChip(this, 'exp')">Expert</button>
+            <button class="fl-chip" onclick="toggleChip(this, 'exp')">Senior</button>
+            <button class="fl-chip" onclick="toggleChip(this, 'exp')">Junior</button>
+            <button class="fl-chip" onclick="toggleChip(this, 'exp')">Intern</button>
+          </div>
+        </div>
+
+        <!-- Work Type -->
+        <div class="fl-filter-section">
+          <span class="fl-filter-label">Work Type</span>
+          <div class="fl-chip-group" id="workChips">
+            <button class="fl-chip" onclick="toggleChip(this, 'work')">Full Time</button>
+            <button class="fl-chip" onclick="toggleChip(this, 'work')">Part Time</button>
+            <button class="fl-chip" onclick="toggleChip(this, 'work')">Remote</button>
+            <button class="fl-chip" onclick="toggleChip(this, 'work')">Contract</button>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="fl-filter-section">
+          <span class="fl-filter-label">Skills</span>
+          <input type="text" class="fl-skill-search" id="skillSearch" placeholder="Search skills…" oninput="filterSkillList(this.value)">
+          <div class="fl-skill-list" id="skillFilterList">
+            <!-- Populated by JS from /api/skills -->
+            <span style="font-size:12px; color:var(--ec-muted);">Loading skills…</span>
+          </div>
+        </div>
+
+        <button class="fl-apply-btn" onclick="applyFilters()">Apply Filters</button>
+      </div>
+    </aside>
+
+    <!-- ── CONTENT ── -->
+    <div>
+      <!-- Toolbar -->
+      <div class="fl-toolbar">
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+          <p class="fl-count" id="resultCount">Loading…</p>
+          <button class="fl-mobile-filter-btn" onclick="toggleMobileSidebar()">
+            <i class="bi bi-sliders"></i> Filters
+          </button>
+        </div>
+        <div class="fl-sort">
+          <span class="fl-sort-label">Sort by</span>
+          <select id="sortSelect" onchange="applyFilters()">
+            <option value="rate_asc">Rate: Low → High</option>
+            <option value="rate_desc">Rate: High → Low</option>
+            <option value="name_asc">Name A–Z</option>
+            <option value="available_first">Available First</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Active filter tags -->
+      <div class="fl-active-filters" id="activeFilters"></div>
+
+      <!-- Cards -->
+      <div id="freelancersList"></div>
+    </div>
+
+  </div><!-- /.fl-layout -->
+
+  <!-- ══ FOOTER (kept from original) ══ -->
+  <footer class="bg-dark position-relative overflow-hidden pb-0 pt-6" data-bs-theme="dark">
+    <div class="container position-relative mt-5">
+      <div class="row g-4 justify-content-between">
+        <div class="col-lg-3">
+          <a href="index.html"><img class="h-40px" src="assets/images/ec_logo-bright.png" alt="logo"></a>
+          <p class="mt-4 mb-2 text-white-50">From concept to execution, we deliver everything code related.</p>
+        </div>
+        <div class="col-lg-4">
+          <h6 class="mb-4">Quick links</h6>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link pt-0" href="about-v1.html">About us</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact-v1.html">Contact us</a></li>
+            <li class="nav-item"><a class="nav-link" href="sign-in.html">Sign in</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="mt-4 mb-0">
+      <div class="py-4 text-center text-white-50 small">© 2024 EverythingCodes. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- CHAT POPUP (same as every page) -->
+  <link rel="stylesheet" href="assets/css/chat/chat.css">
+  <div id="chat-popup" class="chat-popup">
+    <div>
+      <button id="chat-button" class="chat-button">Chat</button>
+      <span id="total-messages" class="total-messages">0</span>
+    </div>
+    <div id="chat-interface" class="chat-interface">
+      <div id="chat-list" class="chat-list">
+        <div class="chat-header">
+          <div class="cancel-button-holder">
+            <button id="close-chat-Button" class="cancel-button">
+              <svg width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 011.708 0L8 6.293l1.646-1.647a.5.5 0 01.708.708L8.707 7l1.647 1.646a.5.5 0 01-.708.708L8 7.707l-1.646 1.647a.5.5 0 01-.708-.708L7.293 7 5.646 5.354a.5.5 0 010-.708z"/></svg>
+            </button>
+          </div>
+          <div class="chat-title-holder"><span class="chat-title">messages</span></div>
+          <div class="search-box-holder">
+            <div class="search-box">
+              <input type="text" placeholder="Search..." id="searchInput">
+              <a href="#"><i class="fas fa-search"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="chat-users"></div>
+      </div>
+    </div>
+    <div id="chat-window" class="chat-window">
+      <div class="chat-window-header">
+        <div class="chat-header-details">
+          <div>
+            <img id="chat-user-image" src="assets/images/auth/03.jpg" alt="" class="user-image">
+            <span id="chat-with">Chat with </span>
+          </div>
+          <div class="chat-header-options">
+            <i class='far fa-hand'></i>
+            <i class='fas fa-phone'></i>
+            <i class='fas fa-search'></i>
+          </div>
+        </div>
+        <button id="close-chat-window" class="close-button">X</button>
+      </div>
+      <div id="chat-messages" class="chat-messages"></div>
+      <div class="chat-input-container">
+        <i class='far fa-smile'></i>
+        <div id="send-file" class='send-file'><i class='fas fa-paperclip'></i></div>
+        <input type="file" id="file-input" style="display: none;">
+        <div id="file-preview" class="file-preview"></div>
+        <input type="text" id="chat-input" class="chat-input" placeholder="Type a message...">
+        <button id="send-button" class="send-button">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.socket.io/4.3.1/socket.io.min.js"></script>
+  <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/signout.js"></script>
+  <script src="assets/js/chat/chat.js"></script>
+  <script src="assets/js/freelancer/getFreelancers.js"></script>
+</body>
+</html>

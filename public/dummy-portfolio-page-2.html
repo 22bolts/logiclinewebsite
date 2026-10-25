@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Projects</title>
+    
+    
+
+    <!-- Dark mode -->
+	<script>
+		const storedTheme = localStorage.getItem('theme')
+ 
+		const getPreferredTheme = () => {
+			if (storedTheme) {
+				return storedTheme
+			}
+			return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'light'
+		}
+
+		const setTheme = function (theme) {
+			if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-bs-theme', 'dark')
+			} else {
+				document.documentElement.setAttribute('data-bs-theme', theme)
+			}
+		}
+
+		setTheme(getPreferredTheme())
+
+		window.addEventListener('DOMContentLoaded', () => {
+		    var el = document.querySelector('.theme-icon-active');
+			if(el != 'undefined' && el != null) {
+				const showActiveTheme = theme => {
+				const activeThemeIcon = document.querySelector('.theme-icon-active use')
+				const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+				const svgOfActiveBtn = btnToActive.querySelector('.mode-switch use').getAttribute('href')
+
+				document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+					element.classList.remove('active')
+				})
+
+				btnToActive.classList.add('active')
+				activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+			}
+
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+				if (storedTheme !== 'light' || storedTheme !== 'dark') {
+					setTheme(getPreferredTheme())
+				}
+			})
+
+			showActiveTheme(getPreferredTheme())
+
+			document.querySelectorAll('[data-bs-theme-value]')
+				.forEach(toggle => {
+					toggle.addEventListener('click', () => {
+						const theme = toggle.getAttribute('data-bs-theme-value')
+						localStorage.setItem('theme', theme)
+						setTheme(theme)
+						showActiveTheme(theme)
+					})
+				})
+
+			}
+		})
+		
+	</script>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="assets/images/logo.png">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/glightbox/css/glightbox.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/swiper/swiper-bundle.min.css">
+	
+	<!-- Theme CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/projects.css">
+
+</head>
+<body>
+    <script src="assets/js/userDetails.js"></script>
+	<header class="header-sticky header-absolute">
+		<!-- Logo Nav START -->
+		<nav class="navbar navbar-expand-xl">
+			<div class="container">
+				<!-- Logo START -->
+				<a class="navbar-brand me-0" href="index.html">
+					<img class="light-mode-item navbar-brand-item" src="assets/images/ec_logo-dark.png" alt="logo">
+					<img class="dark-mode-item navbar-brand-item" src="assets/images/ec_logo-bright.png" alt="logo">
+				</a>
+				<!-- Logo END -->
+	
+				<!-- Main navbar START -->
+				<div class="navbar-collapse collapse" id="navbarCollapse">
+					<ul class="navbar-nav navbar-nav-scroll dropdown-hover mx-auto">
+	
+						<li class="nav-item"> <a class="nav-link" href="index.html">Home</a> </li>
+						
+						<!-- <li class="nav-item"> <a class="nav-link" href="account-projects.html">Projects</a> </li>
+						
+						<li class="nav-item"> <a class="nav-link" href="new-project.html">New Project</a> </li>
+						
+						<li class="nav-item"> <a class="nav-link" href="profile.html">Profile</a> </li> -->
+	
+						<li class="nav-item"> <a class="nav-link" href="feature-single.html">API as a Service</a> </li>
+						<li class="nav-item"> <a class="nav-link" href="about-v1.html">About us</a> </li>
+						
+						<li class="nav-item"> <a class="nav-link" href="services-v1.html">Services</a> </li>
+						
+						<li class="nav-item"> <a class="nav-link" href="pricing.html">Pricing</a> </li>
+						
+						<li class="nav-item"> <a class="nav-link" href="career.html">Career</a> </li>
+	
+						
+	
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">Job</a>
+							<ul class="dropdown-menu">
+								<!-- Dropdown Multilevel -->
+								<li> 
+									<a class="dropdown-item" href="job-list.html">Get hired</a> 
+								</li>
+								<li> 
+									<a class="dropdown-item" href="freelancerList.html">Freelancers</a> 
+								</li>
+								<li> 
+									<a class="dropdown-item" href="faq.html">FAQ</a> 
+								</li>
+								<li> 
+									<a class="dropdown-item" href="docs/index.html">Documentation</a> 
+								</li>
+								<li> 
+									<a class="dropdown-item" href="contact-v1.html">Contact us</a> 
+								</li>
+							</ul>
+						</li>
+	
+						<!-- Nav item -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Portfolio</a>
+							<div class="dropdown-menu dropdown-menu-center dropdown-menu-size-xl p-4">
+								<div class="row g-xl-3">
+									<!-- Work -->
+									<div class="col-xl-8 d-none d-xl-block">
+										<div class="d-flex gap-4">
+											<div class="col-xl-8 d-none d-xl-block">
+												<div class="card bg-transparent">
+													<!-- Dynamic Image Section -->
+													<div id="service-image" class="card bg-transparent">
+														<img src="assets/images/portfolio/list/default.jpg" class="card-img" alt="Service Image">
+													</div>											<!-- Card body -->
+													<div class="card-body px-0 text-start pb-0">
+														<h6><a href="#">Ceremony Worthy of Time</a></h6>
+														<p class="mb-2 small">We help our customers better manage their web presence.</p>
+														<a class="icon-link icon-link-hover stretched-link mb-0" href="portfolio-case-studies-v1.html">Learn more<i class="bi bi-arrow-right"></i> </a>
+													</div>
+												</div>
+											</div>
+	
+											<!-- <div class="card bg-transparent">
+												<img src="assets/images/portfolio/list/02.jpg" class="card-img" alt="">
+												<div class="card-body px-0 text-start pb-0">
+													<h6><a href="#">Brushstrokes and Beyond</a></h6>
+													<p class="mb-2 small">We help our customers better manage their web presence.</p>
+													<a class="icon-link icon-link-hover stretched-link mb-0" href="portfolio-case-studies-v2.html">Learn more<i class="bi bi-arrow-right"></i> </a>
+												</div>
+											</div> -->
+	
+											<!-- Divider line -->
+											<div class="vr ms-2"></div>
+										</div>
+									</div>
+	
+									<!-- Index nav links -->
+									<div class="col-xl-4">
+										<ul class="list-unstyled">
+											<li class="dropdown-header h6">Portfolio Pages</li>
+											
+											<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/api.png">API Development and Integration</a> </li>
+											<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/app.png">App Development</a> </li>
+											<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/web.png">Web Development</a> </li>
+											<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/database.png">Database Dev and Management</a> </li>
+											<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/uiux.png">UI/UX Design</a> </li>
+											<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/api-as-a-service.png">assets/</a> </li>
+											<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/game.png">Game Development</a> </li>
+											<li> <a class="dropdown-item service-link" href="#" data-img-src="assets/images/portfolio/list/webapp.png">Web Applications</a> </li>
+											<!-- <li> <a class="dropdown-item" href="portfolio-masonry.html">Web Development</a> </li>
+											<li> <a class="dropdown-item" href="portfolio-showcase.html">Game Development</a> </li>
+											<li> <a class="dropdown-item" href="portfolio-list.html">App Development</a> </li>
+											<li> <a class="dropdown-item" href="portfolio-case-studies-v1.html">API</a> </li>
+											<li> <a class="dropdown-item" href="portfolio-case-studies-v2.html">Portfolio Case Study v.2</a> </li> -->
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+	
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">Others</a>
+							<ul class="dropdown-menu">
+								<!-- Dropdown Multilevel -->
+								<li> 
+									<a class="dropdown-item" href="blog-grid.html">
+										<i class="fa-fw bi bi-journal me-2"></i>Blog
+									</a> 
+								</li>
+								
+								<!-- Dropdown divider -->
+								<li> <hr class="dropdown-divider"></li>
+								
+								<li> 
+									<a class="dropdown-item" href="career.html">
+										<i class="fa-fw bi bi-briefcase me-2"></i>Career
+									</a> 
+								</li>
+								<li> 
+									<a class="dropdown-item" href="faq.html">
+										<i class="fa-fw bi bi-question-circle me-2"></i>FAQ
+									</a> 
+								</li>
+								<li> 
+									<a class="dropdown-item" href="docs/index.html">
+										<i class="fa-fw bi bi-file-earmark-text me-2"></i>Documentation
+									</a> 
+								</li>
+								<li> 
+									<a class="dropdown-item" href="contact-v1.html">
+										<i class="fa-fw bi bi-envelope me-2"></i>Contact us
+									</a> 
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- Main navbar END -->
+	
+				<!-- Buttons -->
+				<ul class="nav align-items-center dropdown-hover ms-sm-2">
+					<!-- Dark mode option START -->
+					<li class="nav-item dropdown dropdown-animation">
+						<button class="btn btn-link mb-0 px-2 lh-1" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="bi bi-circle-half theme-icon-active fill-mode fa-fw" viewbox="0 0 16 16">
+							<path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+							<use href="#"></use>
+						</svg>
+						</button>
+	
+						<ul class="dropdown-menu min-w-auto dropdown-menu-end" aria-labelledby="bd-theme">
+							<li class="mb-1">
+								<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+									<svg width="16" height="16" fill="currentColor" class="bi bi-brightness-high-fill fa-fw mode-switch me-1" viewbox="0 0 16 16">
+										<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+										<use href="#"></use>
+									</svg>Light
+								</button>
+							</li>
+							<li class="mb-1">
+								<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon-stars-fill fa-fw mode-switch me-1" viewbox="0 0 16 16">
+										<path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+										<path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+										<use href="#"></use>
+									</svg>Dark
+								</button>
+							</li>
+							<li>
+								<button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-half fa-fw mode-switch me-1" viewbox="0 0 16 16">
+										<path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+										<use href="#"></use>
+									</svg>Auto
+								</button>
+							</li>
+						</ul>
+					</li>
+					<!-- Dark mode option END -->
+	
+					<!-- Sign up button -->
+					<div id="signupSection">
+						<li class="nav-item me-2 d-none d-sm-block">
+							<a href="sign-in.html" class="btn btn-sm btn-light mb-0"><i class="bi bi-person-circle me-1"></i>Sign in</a>
+						</li>
+					</div>
+	
+					<div id="profileSection">
+					<!-- <div> -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+								<i class="bi bi-person-circle bi-2x"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<div class="card-header text-center border-bottom">
+										<!-- Avatar -->
+										<div class="avatar avatar-xl position-relative mb-2">
+											<img class="avatar-img rounded-circle border border-2 border-white" src="assets/images/avatar/05.jpg" alt="">
+											<a href="#" class="btn btn-sm btn-round btn-dark position-absolute top-50 start-100 translate-middle mt-4 ms-n3" data-bs-toggle="tooltip" data-bs-title="Edit profile">
+													<i class="bi bi-pencil-square"></i>
+											</a>
+										</div>
+										<!-- <h6 class="mb-0"><div id="userDetails">Drago33000</div></h6> -->
+										<h6 class="mb-0"><div id="userDetail">Drago33000</div></h6>
+										<a href="#" class="text-reset text-primary-hover small"><div id="emailField">hello@gmail.com</div></a>
+								</div>
+								
+								<!-- Dropdown Items -->
+								<li>
+									<a class="dropdown-item" href="profile.html">
+										<i class="fa-fw bi bi-person me-2"></i>Profile
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="account-notification.html">
+										<i class="fa-fw bi bi-bell me-2"></i>Notifications
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="account-settings.html">
+										<i class="fa-fw bi bi-gear me-2"></i>Account Settings
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="account-security.html">
+										<i class="fa-fw bi bi-gear me-2"></i>Security
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="account-payment-details.html">
+										<i class="fa-fw bi bi-credit-card me-2"></i>Subscrition & Payments
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="account-projects.html">
+										<i class="fa-fw bi bi-credit-card me-2"></i>Projects
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="billing.html">
+										<i class="fa-fw bi bi-credit-card me-2"></i>Billing
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="help-center.html">
+										<i class="fa-fw bi bi-question-circle me-2"></i>Help Center
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="activity-log.html">
+										<i class="fa-fw bi bi-clock-history me-2"></i>Activity Log
+									</a>
+								</li>
+								<li>
+									<a id="signoutLink" class="dropdown-item" href="#">
+										<i class="fa-fw bi bi-box-arrow-right me-2"></i>Sign out
+									</a>
+								</li>
+							</ul>
+						</li>
+					</div>
+					
+				</ul>
+	
+			</div>
+		</nav>
+		<!-- Logo Nav END -->
+	</header>
+    <!-- Header END -->
+
+    <!-- **************** MAIN CONTENT START **************** -->
+<main>
+    <div class="video-background" id="videoBackground">
+        <video id="video1" loop muted playsinline>
+            <source src="https://media.istockphoto.com/id/1265220754/video/mock-up-fantasy-rpg-moba-video-game-gameplay-with-role-playing-personage-doing-animated-magic.mp4?s=mp4-640x640-is&k=20&c=n3PvOni4Nz7puhQt0D1gw7R4EDmd9Lkb8lEh0vQtI54=" type="video/mp4">
+        </video>
+        <video id="video2" loop muted playsinline>
+            <source src="https://media.istockphoto.com/id/1357049879/video/video-game-mock-up-concept-game-play-3d-third-person-shooter-online-multiplayer-battle-royale.mp4?s=mp4-640x640-is&k=20&c=X9FMppRUBxo_PN1JOkCcRwGrNbrYkPKz7uG_eZuHuo4=" type="video/mp4">
+        </video>
+        <video id="video3" loop muted playsinline>
+            <source src="https://cdn.pixabay.com/video/2022/08/17/128210-747086064_large.mp4">
+        </video>
+    </div>
+
+    <section class="project-section" data-video="video1">
+        <div class="project-container">
+            <div class="project-header">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=700&fit=crop" alt="TaskFlow App">
+                </div>
+                <div class="project-info">
+                    <h1 class="project-title">TaskFlow</h1>
+                    <p class="project-genre">Productivity • Task Management</p>
+                    <p class="project-description">
+                        A powerful task management application designed to streamline your workflow and boost productivity. TaskFlow combines intuitive design with advanced features like real-time collaboration, smart notifications, and AI-powered task prioritization to help teams stay organized and focused.
+                    </p>
+                    <div class="download-links">
+                        <a href="#" class="download-btn">
+                            <img src="assets/images/elements/windows-com.svg" alt="windows" 
+                            style="width:25px; height: 25px; filter: brightness(0) invert(1);">
+                            <span>Windows</span>
+                        </a>
+                        
+                        <a href="#"  class="download-btn">
+                            <img src="assets/images/elements/android.svg" alt=""
+                            style="width:25px; height: 25px; filter: brightness(0) invert(1);">
+                            <span>android</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-stack-section">
+                <h2 class="section-title2">Key Features</h2>
+                <div class="features-grid">
+                    <a href="#" class="feature-card">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop" alt="Real-time Sync" class="feature-image">
+                        <div class="feature-overlay"></div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">⚡</span>
+                            <span>Real-time Sync</span>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Real-time Sync</h3>
+                            <p class="feature-description">Instant synchronization across all your devices with lightning-fast cloud technology</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="feature-card">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop" alt="AI Assistant" class="feature-image">
+                        <div class="feature-overlay"></div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">🤖</span>
+                            <span>AI Assistant</span>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">AI Assistant</h3>
+                            <p class="feature-description">Smart task prioritization and scheduling powered by advanced machine learning</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="feature-card">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Team Collaboration" class="feature-image">
+                        <div class="feature-overlay"></div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">👥</span>
+                            <span>Team Collaboration</span>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Team Collaboration</h3>
+                            <p class="feature-description">Seamless teamwork with shared workspaces and real-time updates</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="feature-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Analytics Dashboard" class="feature-image">
+                        <div class="feature-overlay"></div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">📊</span>
+                            <span>Analytics Dashboard</span>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Analytics Dashboard</h3>
+                            <p class="feature-description">Comprehensive insights into productivity patterns and performance metrics</p>
+                        </div>
+                    </a>
+                </div>
+                <a href="#" class="view-details-btn">View Full Project Details →</a>
+            </div>
+
+            <div class="technologies-section">
+                <h2 class="section-title2">Software & Technologies Used</h2>
+                <div class="tech-tags">
+                    <div class="tech-tag">
+                        <div class="tech-icon">⚛️</div>
+                        <span>React Native</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🔥</div>
+                        <span>Firebase</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🟢</div>
+                        <span>Node.js</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🐘</div>
+                        <span>PostgreSQL</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🎨</div>
+                        <span>Tailwind CSS</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🔐</div>
+                        <span>JWT Auth</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">📡</div>
+                        <span>WebSocket</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">☁️</div>
+                        <span>AWS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-section" data-video="video2">
+        <div class="project-container">
+            <div class="project-header">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1556742111-a301076d9d18?w=400&h=700&fit=crop" alt="FitTrack Pro">
+                </div>
+                <div class="project-info">
+                    <h1 class="project-title">FitTrack Pro</h1>
+                    <p class="project-genre">Health & Fitness • Wellness</p>
+                    <p class="project-description">
+                        Your personal fitness companion that transforms the way you approach health and wellness. FitTrack Pro offers personalized workout plans, nutrition tracking, and progress analytics all in one beautiful, easy-to-use interface. Whether you're a beginner or an athlete, achieve your fitness goals faster.
+                    </p>
+                    <div class="download-links">
+                        <a href="#" class="download-btn">
+                            <img src="assets/images/elements/windows-com.svg" alt="windows" 
+                            style="width:25px; height: 25px; filter: brightness(0) invert(1);">
+                            <span>Windows</span>
+                        </a>
+                        
+                        <a href="#"  class="download-btn">
+                            <img src="assets/images/elements/android.svg" alt=""
+                            style="width:25px; height: 25px; filter: brightness(0) invert(1);">
+                            <span>android</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-stack-section">
+                <h2 class="section-title2">Key Features</h2>
+                <div class="features-grid">
+                    <a href="#" class="feature-card">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop" alt="Real-time Sync" class="feature-image">
+                        <div class="feature-overlay"></div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">⚡</span>
+                            <span>Real-time Sync</span>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Real-time Sync</h3>
+                            <p class="feature-description">Instant synchronization across all your devices with lightning-fast cloud technology</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="feature-card">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop" alt="AI Assistant" class="feature-image">
+                        <div class="feature-overlay"></div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">🤖</span>
+                            <span>AI Assistant</span>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">AI Assistant</h3>
+                            <p class="feature-description">Smart task prioritization and scheduling powered by advanced machine learning</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="feature-card">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Team Collaboration" class="feature-image">
+                        <div class="feature-overlay"></div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">👥</span>
+                            <span>Team Collaboration</span>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Team Collaboration</h3>
+                            <p class="feature-description">Seamless teamwork with shared workspaces and real-time updates</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="feature-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Analytics Dashboard" class="feature-image">
+                        <div class="feature-overlay"></div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">📊</span>
+                            <span>Analytics Dashboard</span>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Analytics Dashboard</h3>
+                            <p class="feature-description">Comprehensive insights into productivity patterns and performance metrics</p>
+                        </div>
+                    </a>
+                </div>
+                <a href="#" class="view-details-btn">View Full Project Details →</a>
+            </div>
+
+            <div class="technologies-section">
+                <h2 class="section-title2">Software & Technologies Used</h2>
+                <div class="tech-tags">
+                    <div class="tech-tag">
+                        <div class="tech-icon">📱</div>
+                        <span>Flutter</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🎯</div>
+                        <span>Dart</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🔥</div>
+                        <span>Firestore</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🐍</div>
+                        <span>Python</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🧠</div>
+                        <span>TensorFlow</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">📊</div>
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">⚡</div>
+                        <span>FastAPI</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🔔</div>
+                        <span>Push Notifications</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-section" data-video="video3">
+        <div class="project-container">
+            <div class="project-header">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=700&fit=crop" alt="StreamVibe">
+                </div>
+                <div class="project-info">
+                    <h1 class="project-title">StreamVibe</h1>
+                    <p class="project-genre">Entertainment • Media Streaming</p>
+                    <p class="project-description">
+                        Experience entertainment like never before with StreamVibe. Our cutting-edge streaming platform delivers high-quality content with adaptive streaming technology, personalized recommendations, and a sleek interface. Enjoy your favorite shows and movies across all your devices with offline download capabilities.
+                    </p>
+                    <div class="download-links">
+                        <a href="#" class="download-btn">
+                            <img src="assets/images/elements/windows-com.svg" alt="windows" 
+                            style="width:25px; height: 25px; filter: brightness(0) invert(1);">
+                            <span>Windows</span>
+                        </a>
+                        
+                        <a href="#"  class="download-btn">
+                            <img src="assets/images/elements/android.svg" alt=""
+                            style="width:25px; height: 25px; filter: brightness(0) invert(1);">
+                            <span>android</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-stack-section">
+                <h2 class="section-title2">Key Features</h2>
+                <div class="features-grid">
+                    <a href="#" class="feature-card">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop" alt="Real-time Sync" class="feature-image">
+                        <div class="feature-overlay"></div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">⚡</span>
+                            <span>Real-time Sync</span>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Real-time Sync</h3>
+                            <p class="feature-description">Instant synchronization across all your devices with lightning-fast cloud technology</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="feature-card">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop" alt="AI Assistant" class="feature-image">
+                        <div class="feature-overlay"></div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">🤖</span>
+                            <span>AI Assistant</span>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">AI Assistant</h3>
+                            <p class="feature-description">Smart task prioritization and scheduling powered by advanced machine learning</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="feature-card">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Team Collaboration" class="feature-image">
+                        <div class="feature-overlay"></div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">👥</span>
+                            <span>Team Collaboration</span>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Team Collaboration</h3>
+                            <p class="feature-description">Seamless teamwork with shared workspaces and real-time updates</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="feature-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Analytics Dashboard" class="feature-image">
+                        <div class="feature-overlay"></div>
+                        <div class="feature-tag">
+                            <span class="feature-icon">📊</span>
+                            <span>Analytics Dashboard</span>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Analytics Dashboard</h3>
+                            <p class="feature-description">Comprehensive insights into productivity patterns and performance metrics</p>
+                        </div>
+                    </a>
+                </div>
+                <a href="#" class="view-details-btn">View Full Project Details →</a>
+            </div>
+
+            <div class="technologies-section">
+                <h2 class="section-title2">Software & Technologies Used</h2>
+                <div class="tech-tags">
+                    <div class="tech-tag">
+                        <div class="tech-icon">⚛️</div>
+                        <span>React</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">📘</div>
+                        <span>TypeScript</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🟢</div>
+                        <span>Node.js</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">⚡</div>
+                        <span>Express</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🎥</div>
+                        <span>FFmpeg</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">☁️</div>
+                        <span>AWS S3</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🌐</div>
+                        <span>CloudFront CDN</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🔴</div>
+                        <span>Redis</span>
+                    </div>
+                    <div class="tech-tag">
+                        <div class="tech-icon">🎬</div>
+                        <span>HLS Protocol</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const sections = document.querySelectorAll('.project-section');
+        const videos = {
+            video1: document.getElementById('video1'),
+            video2: document.getElementById('video2'),
+            video3: document.getElementById('video3')
+        };
+
+        let currentVideo = 'video1';
+
+        function switchVideo(videoId) {
+            if (currentVideo === videoId) return;
+
+            Object.values(videos).forEach(video => {
+                video.classList.remove('active');
+                video.pause();
+            });
+
+            videos[videoId].classList.add('active');
+            videos[videoId].play();
+            currentVideo = videoId;
+        }
+
+        // Initialize first video
+        videos[currentVideo].classList.add('active');
+        videos[currentVideo].play();
+
+        // Intersection Observer for section detection
+        const observerOptions = {
+            threshold: 0,
+            rootMargin: '-40% 0px -40% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const videoId = entry.target.getAttribute('data-video');
+                    switchVideo(videoId);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+
+<!-- =======================
+Footer START -->
+<footer class="bg-dark position-relative overflow-hidden pt-6" data-bs-theme="dark">
+
+	<!-- SVG decoration -->
+	<figure class="position-absolute top-0 start-0 mt-n8 ms-n9">
+		<svg class="fill-mode" width="775px" height="834px" viewbox="0 0 775 834" style="enable-background:new 0 0 775 834; opacity: 0.05;" xml:space="preserve">
+			<path d="M486.1,564.4c-3.6,2.5-7.4,4.8-11.3,6.4c-12,5.5-25.7,7.9-42.2,7.4c-30.6-1.1-65.6-12.5-102.8-24.4 c-50.7-16.2-103.3-33.4-152.5-27c-56.1,7.2-97.9,44.4-128,114l-0.4-0.2c67.5-156.1,181-119.5,281.1-87.1c37,12,72,23.2,102.5,24.3 c34.3,1.2,58.1-10.7,74.9-37.4C530.1,505,547.1,466,565,425.1C619.4,301,675.6,172.7,892.1,141.3l0.1,0.4 c-216.2,31.4-272.5,159.5-326.8,283.5c-18.1,41.1-35,79.7-57.7,115.6C501.6,550.7,494.5,558.5,486.1,564.4z"></path>
+			<path d="M500.9,551.4c-43.7,31-103,15.8-165.5-0.2c-49.9-12.7-101.5-25.8-148.7-16.7c-53.3,10.5-93.2,49-121.6,118 l-0.5-0.1c15.3-37.1,33.3-64.7,55.1-84.7c19.5-17.7,41.3-28.6,66.7-33.7c47.4-9.2,99,3.9,148.9,16.6 c70.4,17.9,137.1,34.9,181.3-14.4c35.7-39.9,57.3-91.7,80.2-146.7c23.8-56.7,48.2-115.5,90.2-163.6c22.7-25.9,48.4-46.4,78.4-62.4 c33.9-18.1,72.2-30.3,117.1-37.1l0.1,0.4C695,155.3,645.2,274.5,597.1,389.7c-22.9,55-44.5,106.8-80.4,146.8 C512.3,542.4,506.6,547.3,500.9,551.4z"></path>
+			<path d="M521.3,536.4c-21.9,15.5-48.4,23.4-80.8,23.8c-31.2,0.5-65.1-5.8-97.9-11.9c-49.3-9.2-100.2-18.7-145.7-6.5 c-51.1,13.7-88.9,53.7-116,122.6l-0.6-0.2c60.5-154.1,163.3-135,262.6-116.5c68.1,12.7,132.6,24.6,183.6-15.8 c48.1-38.2,71.1-100.6,95.6-166.5c20.3-55,41.4-111.6,78.3-158.1c20-25.1,42.7-44.9,69.2-60.5c30.1-17.5,64.2-29.1,104.3-35.4 l0.2,0.6c-167.2,26.3-210,141.9-251.4,253.5C598.3,431.5,575,493.8,527,532.2C525.1,533.8,523.2,535.1,521.3,536.4z"></path>
+			<path d="M548.9,520.3c-4,2.9-8.2,5.6-12.6,8c-56.6,31.5-120.9,23.8-183,16.6c-51.7-6-100.4-11.8-144.6,3.2 c-49.9,16.9-85.5,57.7-111.3,128.2l-0.6-0.2c13.7-37.3,30.1-66,49.9-87.8c17.8-19.4,37.9-32.8,61.8-40.9 c44.3-15,93.1-9.3,144.9-3.2c62.1,7.2,126.3,14.8,182.8-16.6c59.6-33.2,82-104.7,105.9-180.4c17.1-54.3,34.7-110.5,67.2-156.6 c36.7-52,87.8-82.8,155.7-94l0.2,0.6c-151.9,25-187.8,139.3-222.3,250C620.4,417.6,599.4,484.5,548.9,520.3z"></path>
+			<path d="M573.5,509.5c-8.2,5.8-17.4,10.7-27.7,14.6c-59.3,22-119.1,18.8-176.8,15.8c-53.2-2.8-103.3-5.3-147.1,12.5 C172.6,572.3,138.1,615.5,113,688l-0.5-0.1c25.1-72.7,59.6-115.9,108.9-136c44-18,94.2-15.3,147.6-12.6 c57.7,3,117.4,6.1,176.6-15.9c70.7-26.2,91.1-106.3,112.8-191.4c13.9-54.5,28.3-111,56.7-156.9C747,123.2,793,92.6,855.6,82l0,0.7 C716.3,106.5,687,221.4,658.9,332.2C640.4,405,622.6,474.4,573.5,509.5z"></path>
+			<path d="M595.2,502.3c-11.3,8-24.6,14-40,17.4c-56.8,12.7-112,12.7-160.5,12.9c-60.2,0.1-112,0.2-157,21.1 c-49.5,23-84,69.3-108.5,146l-0.6-0.2c24.3-76.7,58.9-123.1,108.6-146.3c45.1-21.1,97.2-21.1,157.4-21.2 c48.6,0,103.6-0.1,160.5-12.9c81.6-18.3,99-106.7,117.4-200.6c10.7-55,22-112,46.6-158.2C747,108,788.6,77.5,846.5,67.2l0.1,0.8 C718,91.2,695.2,206.9,673.2,318.9C658.3,394.9,643.8,467.8,595.2,502.3z"></path>
+			<path d="M615.3,497.4c-13.7,9.7-30.2,16-50.8,18c-44.4,4.6-86.5,5.8-123.6,6.8c-71.2,2-132.8,3.7-182,27.7 C206,575.6,169.8,627,145,711.3l-0.8-0.1c13-44.6,29-79.3,48.6-106.3c18.1-24.9,39.5-43.1,65.6-55.7 c49.5-24.1,110.9-25.8,182.4-27.7c37.1-1,79.3-2.2,123.5-6.7c92.6-9.4,106.2-106.5,120.5-209.2c7.8-55.9,15.9-113.6,37-160 c23.8-52.7,61.6-83.1,115.3-93.4l0.3,0.7c-53.4,10.1-91,40.4-114.6,92.9c-21.1,46.4-29.2,104.1-36.8,159.9 C674.6,386,663.8,463,615.3,497.4z"></path>
+			<path d="M634.4,494c-15.5,11-35.2,17.2-60.4,17.3c-12.3,0.1-24.5,0.1-36.1,0.1c-103.7,0-185.5-0.1-246.4,26.4 c-63.5,27.7-103.7,85-130.5,185.5l-0.8-0.1c13.9-52.5,31.3-92.6,53.2-122.9c20.7-28.8,46.2-49.4,77.8-63.2 c61-26.6,142.9-26.4,246.6-26.4c11.7,0.1,23.8,0,36.1-0.1c103.8-0.2,112.9-105.6,122.5-217.2c4.7-56.9,9.9-115.5,27.5-162.4 c20-53.1,54.1-83.7,104.1-93.7l0.1,0.8c-49.5,9.8-83.5,40.3-103.3,93.1c-17.6,46.9-22.7,105.4-27.6,162 C690.1,378.2,682.9,459.6,634.4,494z"></path>
+			<path d="M652.7,491.8c-17.9,12.7-40.7,17.7-69.2,15.4C328,486.2,228.3,517.5,177.2,735.2l-0.9-0.3 c25.9-110.7,64-171.6,127-204c66.6-34.2,160.2-34.6,280.3-24.7c32.2,2.6,56.9-4.1,75.4-20.5c42.1-37.4,45.1-118.6,48-204.7 c4-116.5,8.1-236.8,112.1-258.6l0.1,0.8C715.9,44.8,711.8,164.8,707.8,280.9c-3.1,86.3-5.8,167.7-48.3,205.2 C657.3,488.3,655,490.1,652.7,491.8z"></path>
+			<path d="M670.6,490.3c-19.3,13.7-44.8,17.9-77.7,12.7c-138.5-21.4-227.1-13-287.3,27 c-55.4,36.8-89.1,101.7-112.4,216.9l-0.9-0.3C215.8,631,249.6,566,305.1,528.9c60.3-40.1,149.1-48.6,288.1-27.3 c35.9,5.5,63,0,82.6-16.9c43.2-37.5,42.2-124.3,40.9-216.1C714.9,151,713,28.8,809.9,7.7l0.1,0.8c-96,21.1-94.3,142.7-92.7,260.6 c1.3,92.1,2.4,179-41.1,216.7C674.3,487.4,672.6,488.9,670.6,490.3z"></path>
+		</svg>
+	</figure>
+
+	<!-- SVG decoration -->
+	<div class="position-absolute top-0 end-0 mt-n3 me-n4">
+		<img src="assets/images/elements/decoration-pattern-2.svg" style="opacity:0.05;" alt="">
+	</div>
+
+	<div class="container position-relative mt-5">
+		<div class="row g-4 justify-content-between">
+
+			<!-- Widget 1 START -->
+			<div class="col-lg-3">
+				<!-- logo -->
+				<a class="me-0" href="index.html">
+					<img class="light-mode-item h-40px" src="assets/images/Logo.svg" alt="logo">
+					<img class="dark-mode-item h-40px" src="assets/images/logo-light.svg" alt="logo">
+				</a>
+
+				<p class="mt-4 mb-2">A Bootstrap theme that's both stylish and functional, perfect for any type of technology or corporate website.</p>
+			</div>
+			<!-- Widget 1 END -->
+
+			<!-- Widget 2 START -->
+			<div class="col-lg-8 col-xxl-7">
+				<div class="row g-4">
+					<!-- Link block -->
+					<div class="col-6 col-md-4">
+						<h6 class="mb-2 mb-md-4">Quick links</h6>
+						<ul class="nav flex-column">
+							<li class="nav-item"><a class="nav-link pt-0" href="about-v1.html">About us</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact-v1.html">Contact us</a></li>
+							<li class="nav-item"><a class="nav-link" href="career.html">Career <span class="badge text-bg-danger ms-2">2 Job</span></a></li>
+							<li class="nav-item"><a class="nav-link" href="career-single.html">Career detail</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact-v1.html">Become a partner</a></li>
+							<li class="nav-item"><a class="nav-link" href="sign-in.html">Sign in</a></li>
+							<li class="nav-item"><a class="nav-link" href="sign-up.html">Sign up</a></li>
+						</ul>
+					</div>
+
+					<!-- Link block -->
+					<div class="col-6 col-md-4">
+						<h6 class="mb-2 mb-md-4">Community</h6>
+						<ul class="nav flex-column">
+							<li class="nav-item"><a class="nav-link pt-0" href="#">Documents</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Supports <i class="bi bi-box-arrow-up-right small ms-1"></i></a></li>
+							<li class="nav-item"><a class="nav-link" href="faq.html">Faqs</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Privacy Policy</a></li>
+							<li class="nav-item"><a class="nav-link" href="blog-grid.html">News and blogs</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Terms & condition</a></li>
+						</ul>
+					</div>
+
+					<!-- Link block -->
+					<div class="col-md-4">
+						<h6 class="mb-2 mb-md-4">App available on</h6>
+						<div class="row g-2 mt-2 mb-4 mb-sm-5">
+							<!-- Google play store button -->
+							<div class="col-5 col-sm-4 col-md-6">
+								<a href="#"> <img src="assets/images/elements/google-play.svg" alt=""> </a>
+							</div>
+							<!-- App store button -->
+							<div class="col-5 col-sm-4 col-md-6">
+								<a href="#"> <img src="assets/images/elements/app-store.svg" alt="app-store"> </a>
+							</div>
+						</div>
+
+						<!-- Social buttons -->
+						<h6 class="mb-2 mb-md-4">Follow on</h6>
+
+						<ul class="list-inline mb-0 mt-3">
+							<li class="list-inline-item"> <a class="btn btn-xs btn-icon btn-light" href="#"><i class="fab fa-fw fa-facebook-f lh-base"></i></a> </li>
+							<li class="list-inline-item"> <a class="btn btn-xs btn-icon btn-light" href="#"><i class="fab fa-fw fa-instagram lh-base"></i></a> </li>
+							<li class="list-inline-item"> <a class="btn btn-xs btn-icon btn-light" href="#"><i class="fab fa-fw fa-twitter lh-base"></i></a> </li>
+							<li class="list-inline-item"> <a class="btn btn-xs btn-icon btn-light" href="#"><i class="fab fa-fw fa-linkedin-in lh-base"></i></a> </li>
+							<li class="list-inline-item"> <a class="btn btn-xs btn-icon btn-light" href="#"><i class="fab fa-fw fa-youtube lh-base"></i></a> </li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- Widget 2 END -->
+		</div>
+
+		<!-- Divider -->
+		<hr class="mt-4 mb-0">
+
+		<!-- Bottom footer -->
+		<div class="d-md-flex justify-content-between align-items-center text-center text-lg-start py-4">
+			<!-- copyright text -->
+			<div class="text-body"> Copyrights ©2024 Mizzle. Build by <a href="https://www.webestica.com/" class="text-body text-primary-hover">Webestica</a>. </div>
+			<!-- copyright links-->
+			<!-- Language selector -->
+			<div class="dropdown dropup text-center text-md-end mt-3 mt-md-0">
+				<a class="dropdown-toggle btn btn-sm btn-light mb-0" href="#" role="button" id="languageSwitcher" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="fas fa-globe me-2"></i>Language
+				</a>
+				<ul class="dropdown-menu min-w-auto" aria-labelledby="languageSwitcher">
+					<li><a class="dropdown-item me-4" href="#"><img class="fa-fw me-2" src="assets/images/flags/uk.svg" alt="">English</a></li>
+					<li><a class="dropdown-item me-4" href="#"><img class="fa-fw me-2" src="assets/images/flags/gr.svg" alt="">German </a></li>
+					<li><a class="dropdown-item me-4" href="#"><img class="fa-fw me-2" src="assets/images/flags/sp.svg" alt="">French</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- =======================
+Footer END -->
+
+<!-- Back to top -->
+<div class="back-top"></div>
+
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<!--Vendors-->
+<script src="assets/vendor/purecounterjs/dist/purecounter_vanilla.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+<!-- Theme Functions -->
+<script src="assets/js/functions.js"></script>
+</body>
+</html>

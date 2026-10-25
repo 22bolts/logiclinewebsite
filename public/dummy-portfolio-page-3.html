@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .video-background video.active {
+            opacity: 0.3;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            padding: 80px 20px 100px;
+        }
+
+        .project-section {
+            max-width: 1400px;
+            margin: 0 auto 100px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 60px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .project-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 700px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .project-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .project-genre {
+            font-size: 1.2rem;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 40px;
+        }
+
+        .download-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-title2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            position: relative;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .feature-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.9) 100%);
+        }
+
+        .feature-tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 30px;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .tech-tag {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tech-icon {
+            font-size: 1.5rem;
+        }
+
+        .view-details-btn {
+            display: inline-block;
+            margin: 0 auto;
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .view-details-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .development-process {
+            margin-top: 60px;
+        }
+
+        .process-video {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .process-video video {
+            width: 100%;
+            display: block;
+        }
+
+        .process-writeup {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .process-writeup h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .process-writeup p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .pagination-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 80px;
+            padding: 40px;
+        }
+
+        .pagination-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .pagination-info {
+            font-size: 1.2rem;
+            color: #888;
+        }
+
+        @media (max-width: 1024px) {
+            .project-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .project-image img {
+                height: 500px;
+            }
+
+            .project-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-section {
+                padding: 30px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pagination-controls {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background" id="videoBackground">
+        <video id="video1" loop muted playsinline>
+            <source src="https://media.istockphoto.com/id/1265220754/video/mock-up-fantasy-rpg-moba-video-game-gameplay-with-role-playing-personage-doing-animated-magic.mp4?s=mp4-640x640-is&k=20&c=n3PvOni4Nz7puhQt0D1gw7R4EDmd9Lkb8lEh0vQtI54=" type="video/mp4">
+        </video>
+        <video id="video2" loop muted playsinline>
+            <source src="https://media.istockphoto.com/id/1357049879/video/video-game-mock-up-concept-game-play-3d-third-person-shooter-online-multiplayer-battle-royale.mp4?s=mp4-640x640-is&k=20&c=X9FMppRUBxo_PN1JOkCcRwGrNbrYkPKz7uG_eZuHuo4=" type="video/mp4">
+        </video>
+        <video id="video3" loop muted playsinline>
+            <source src="https://cdn.pixabay.com/video/2022/08/17/128210-747086064_large.mp4">
+        </video>
+    </div>
+
+    <main id="projectsContainer"></main>
+
+    <div class="pagination-controls">
+        <button class="pagination-btn" id="prevBtn" onclick="previousPage()">← Previous</button>
+        <div class="pagination-info" id="pageInfo">Page 1 of 3</div>
+        <button class="pagination-btn" id="nextBtn" onclick="nextPage()">Next →</button>
+    </div>
+
+    <script>
+        // Project data structure
+        const projects = [
+            {
+                id: 1,
+                title: "TaskFlow",
+                genre: "Productivity • Task Management",
+                image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=700&fit=crop",
+                description: "A powerful task management application designed to streamline your workflow and boost productivity. TaskFlow combines intuitive design with advanced features like real-time collaboration, smart notifications, and AI-powered task prioritization to help teams stay organized and focused.",
+                videoId: "video1",
+                downloads: [
+                    { platform: "Windows", icon: "assets/images/elements/windows-com.svg", url: "#" },
+                    { platform: "Android", icon: "assets/images/elements/android.svg", url: "#" }
+                ],
+                features: [
+                    {
+                        title: "Real-time Sync",
+                        icon: "⚡",
+                        description: "Instant synchronization across all your devices with lightning-fast cloud technology",
+                        image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Community Support",
+                        icon: "🤝",
+                        description: "Join support groups and connect with others on similar journeys",
+                        image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "AI Assistant",
+                        icon: "🤖",
+                        description: "Smart task prioritization and scheduling powered by advanced machine learning",
+                        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Team Collaboration",
+                        icon: "👥",
+                        description: "Seamless teamwork with shared workspaces and real-time updates",
+                        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Analytics Dashboard",
+                        icon: "📊",
+                        description: "Comprehensive insights into productivity patterns and performance metrics",
+                        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop"
+                    }
+                ],
+                technologies: [
+                    { name: "React Native", icon: "⚛️" },
+                    { name: "Python", icon: "🐍" },
+                    { name: "TensorFlow", icon: "🧠" },
+                    { name: "WebRTC", icon: "📹" },
+                    { name: "Socket.io", icon: "🔌" },
+                    { name: "MongoDB", icon: "🍃" },
+                    { name: "Azure", icon: "☁️" },
+                    { name: "HIPAA Compliance", icon: "🔒" }
+                ],
+                developmentProcess: {
+                    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                    writeup: `
+                        <h3>Addressing Mental Health Accessibility</h3>
+                        <p>MindSpace was created to address the mental health crisis exacerbated by limited access to professional care. Our team worked closely with clinical psychologists, meditation experts, and mental health advocates to create an evidence-based platform that complements traditional therapy.</p>
+                        
+                        <h3>Privacy & Security First</h3>
+                        <p>Given the sensitive nature of mental health data, we implemented bank-level encryption and achieved HIPAA compliance before launch. All therapy sessions use end-to-end encryption via WebRTC, and mood tracking data is anonymized and stored with multi-layer security protocols.</p>
+                        
+                        <h3>AI-Powered Mood Analysis</h3>
+                        <p>Our mood tracking feature uses natural language processing to analyze journal entries and identify patterns in emotional states. The AI model was trained on therapeutic literature and validated by clinical psychologists, achieving 87% accuracy in identifying potential mental health concerns that warrant professional attention.</p>
+                        
+                        <h3>Real-World Impact</h3>
+                        <p>MindSpace has served 300,000 users, facilitated 50,000 therapy sessions, and maintains partnerships with 400+ licensed therapists. User studies show a 68% improvement in self-reported mental well-being after 3 months of consistent use. The platform has been featured in mental health publications and recommended by therapists nationwide.</p>
+                    `
+                }
+            },
+            {
+                id: 2,
+                title: "FitTrack Pro",
+                genre: "Health & Fitness • Wellness",
+                image: "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=400&h=700&fit=crop",
+                description: "Your personal fitness companion that transforms the way you approach health and wellness. FitTrack Pro offers personalized workout plans, nutrition tracking, and progress analytics all in one beautiful, easy-to-use interface. Whether you're a beginner or an athlete, achieve your fitness goals faster.",
+                videoId: "video2",
+                downloads: [
+                    { platform: "Windows", icon: "assets/images/elements/windows-com.svg", url: "#" },
+                    { platform: "Android", icon: "assets/images/elements/android.svg", url: "#" }
+                ],
+                features: [
+                    {
+                        title: "Personalized Plans",
+                        icon: "🎯",
+                        description: "Custom workout and nutrition plans tailored to your fitness level and goals",
+                        image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Progress Tracking",
+                        icon: "📈",
+                        description: "Visual analytics showing your improvements across all fitness metrics",
+                        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Workout Library",
+                        icon: "💪",
+                        description: "Extensive exercise database with video demonstrations and form tips",
+                        image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Nutrition Coach",
+                        icon: "🥗",
+                        description: "AI-powered meal recommendations based on your dietary preferences and goals",
+                        image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop"
+                    }
+                ],
+                technologies: [
+                    { name: "Flutter", icon: "📱" },
+                    { name: "Dart", icon: "🎯" },
+                    { name: "Firestore", icon: "🔥" },
+                    { name: "Python", icon: "🐍" },
+                    { name: "TensorFlow", icon: "🧠" },
+                    { name: "MongoDB", icon: "📊" },
+                    { name: "FastAPI", icon: "⚡" },
+                    { name: "Push Notifications", icon: "🔔" }
+                ],
+                developmentProcess: {
+                    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                    writeup: `
+                        <h3>Concept & Research</h3>
+                        <p>FitTrack Pro emerged from extensive research into fitness app engagement rates. We discovered that 80% of users abandon fitness apps within the first month. Our mission was to create an app that keeps users motivated through personalized experiences and visible progress tracking.</p>
+                        
+                        <h3>Technology Stack Selection</h3>
+                        <p>Flutter was chosen for its exceptional performance and beautiful UI capabilities. The framework's hot reload feature accelerated our development cycle significantly. For the AI nutrition coach, we implemented TensorFlow models trained on nutritional databases containing over 500,000 food items and their macronutrient profiles.</p>
+                        
+                        <h3>Development Milestones</h3>
+                        <p>The project underwent six major iterations based on beta tester feedback. We initially built a complex calorie tracking system, but user testing revealed it was too time-consuming. We pivoted to a photo-based meal logging system using computer vision, reducing logging time by 75%.</p>
+                        
+                        <h3>User Engagement Strategies</h3>
+                        <p>To combat the typical abandonment rate, we implemented gamification elements, achievement badges, and a social community feature. These strategies resulted in a 60% 90-day retention rate, significantly higher than industry average. The app now has 150,000 active users with an average session time of 18 minutes.</p>
+                    `
+                }
+            },
+            {
+                id: 3,
+                title: "StreamVibe",
+                genre: "Entertainment • Media Streaming",
+                image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=700&fit=crop",
+                description: "Experience entertainment like never before with StreamVibe. Our cutting-edge streaming platform delivers high-quality content with adaptive streaming technology, personalized recommendations, and a sleek interface. Enjoy your favorite shows and movies across all your devices with offline download capabilities.",
+                videoId: "video3",
+                downloads: [
+                    { platform: "Windows", icon: "assets/images/elements/windows-com.svg", url: "#" },
+                    { platform: "Android", icon: "assets/images/elements/android.svg", url: "#" }
+                ],
+                features: [
+                    {
+                        title: "4K HDR Streaming",
+                        icon: "🎬",
+                        description: "Crystal-clear video quality with adaptive bitrate for seamless playback",
+                        image: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Smart Recommendations",
+                        icon: "🎯",
+                        description: "AI-powered content discovery based on your viewing habits and preferences",
+                        image: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Offline Downloads",
+                        icon: "📥",
+                        description: "Download content for offline viewing anywhere, anytime",
+                        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Multi-Device Sync",
+                        icon: "📱",
+                        description: "Continue watching seamlessly across all your devices",
+                        image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=600&h=400&fit=crop"
+                    }
+                ],
+                technologies: [
+                    { name: "React", icon: "⚛️" },
+                    { name: "TypeScript", icon: "📘" },
+                    { name: "Node.js", icon: "🟢" },
+                    { name: "Express", icon: "⚡" },
+                    { name: "FFmpeg", icon: "🎥" },
+                    { name: "AWS S3", icon: "☁️" },
+                    { name: "CloudFront CDN", icon: "🌐" },
+                    { name: "Redis", icon: "🔴" },
+                    { name: "HLS Protocol", icon: "🎬" }
+                ],
+                developmentProcess: {
+                    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                    writeup: `
+                        <h3>Market Analysis & Vision</h3>
+                        <p>StreamVibe was born from identifying gaps in existing streaming services. While major players focused on content libraries, we saw an opportunity to differentiate through superior technology and user experience. Our goal was to create the smoothest streaming experience possible, regardless of connection quality.</p>
+                        
+                        <h3>Infrastructure & Scalability</h3>
+                        <p>Building a streaming platform required significant infrastructure planning. We implemented a multi-CDN strategy using CloudFront as our primary CDN, with automatic failover to secondary providers. Video encoding utilizes FFmpeg with custom profiles optimized for different devices and connection speeds, generating 8 quality variants for each piece of content.</p>
+                        
+                        <h3>Recommendation Engine</h3>
+                        <p>The recommendation algorithm combines collaborative filtering with content-based filtering, analyzing over 50 different data points including watch time, completion rate, genre preferences, and viewing patterns. Machine learning models continuously improve recommendations, resulting in a 45% increase in content discovery compared to traditional category browsing.</p>
+                        
+                        <h3>Performance Optimization</h3>
+                        <p>Through aggressive optimization, we achieved sub-2-second startup times and implemented predictive preloading that anticipates user behavior. Redis caching reduces database queries by 90%, while HLS adaptive streaming ensures smooth playback even on unstable connections. The platform now serves 5 million hours of content monthly with 99.99% uptime.</p>
+                    `
+                }
+            },
+            {
+                id: 4,
+                title: "EcoCommerce",
+                genre: "E-Commerce • Sustainability",
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=700&fit=crop",
+                description: "A revolutionary marketplace connecting conscious consumers with sustainable brands. EcoCommerce makes ethical shopping easy with carbon footprint tracking, verified eco-certifications, and transparent supply chain information for every product.",
+                videoId: "video1",
+                downloads: [
+                    { platform: "Windows", icon: "assets/images/elements/windows-com.svg", url: "#" },
+                    { platform: "Android", icon: "assets/images/elements/android.svg", url: "#" }
+                ],
+                features: [
+                    {
+                        title: "Carbon Tracking",
+                        icon: "🌱",
+                        description: "Track the environmental impact of your purchases in real-time",
+                        image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Verified Brands",
+                        icon: "✅",
+                        description: "Every seller undergoes rigorous sustainability certification",
+                        image: "https://images.unsplash.com/photo-1556155092-490a1ba16284?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Supply Chain Transparency",
+                        icon: "🔍",
+                        description: "View complete product journey from source to delivery",
+                        image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Impact Dashboard",
+                        icon: "📊",
+                        description: "Visualize your positive environmental contribution over time",
+                        image: "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=600&h=400&fit=crop"
+                    }
+                ],
+                technologies: [
+                    { name: "Vue.js", icon: "💚" },
+                    { name: "Django", icon: "🐍" },
+                    { name: "PostgreSQL", icon: "🐘" },
+                    { name: "Stripe", icon: "💳" },
+                    { name: "Blockchain", icon: "⛓️" },
+                    { name: "Docker", icon: "🐳" },
+                    { name: "Kubernetes", icon: "☸️" },
+                    { name: "GraphQL", icon: "📊" }
+                ],
+                developmentProcess: {
+                    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                    writeup: `
+                        <h3>Mission-Driven Development</h3>
+                        <p>EcoCommerce was founded on the principle that sustainable shopping shouldn't be difficult. Our team of environmentalists and developers collaborated for 8 months to build a platform that makes eco-friendly choices the default, not an afterthought.</p>
+                        
+                        <h3>Blockchain Integration</h3>
+                        <p>To ensure supply chain transparency, we implemented blockchain technology to create an immutable record of each product's journey. Every step from raw material sourcing to final delivery is recorded, providing consumers with unprecedented visibility into product origins and environmental impact.</p>
+                        
+                        <h3>Carbon Calculation Engine</h3>
+                        <p>Our proprietary carbon calculation system analyzes multiple factors: manufacturing processes, transportation methods, packaging materials, and product lifespan. This required partnerships with environmental scientists and integration with multiple carbon databases to ensure accuracy.</p>
+                        
+                        <h3>Community Impact</h3>
+                        <p>Since launch, EcoCommerce has facilitated $12M in sustainable purchases, saved an estimated 2,400 tons of CO2 emissions, and onboarded 800+ verified sustainable brands. User surveys show 92% feel more confident about their purchasing decisions using our platform.</p>
+                    `
+                }
+            },
+            {
+                id: 5,
+                title: "MindSpace",
+                genre: "Mental Health • Wellness",
+                image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=700&fit=crop",
+                description: "A comprehensive mental wellness platform offering meditation, therapy sessions, mood tracking, and community support. MindSpace uses evidence-based techniques combined with AI-powered insights to help users maintain their mental well-being.",
+                videoId: "video2",
+                downloads: [
+                    { platform: "Windows", icon: "assets/images/elements/windows-com.svg", url: "#" },
+                    { platform: "Android", icon: "assets/images/elements/android.svg", url: "#" }
+                ],
+                features: [
+                    {
+                        title: "Guided Meditation",
+                        icon: "🧘",
+                        description: "500+ meditation sessions led by certified instructors",
+                        image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Mood Insights",
+                        icon: "💭",
+                        description: "AI-powered mood pattern recognition and personalized recommendations",
+                        image: "https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Therapy Connect",
+                        icon: "👨‍⚕️",
+                        description: "Connect with licensed therapists for video or chat sessions",
+                        image: "https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=600&h=400&fit=crop"
+                    }
+                ],
+                technologies: [
+                    { name: "Vue.js", icon: "💚" },
+                    { name: "Django", icon: "🐍" },
+                    { name: "PostgreSQL", icon: "🐘" },
+                    { name: "Stripe", icon: "💳" },
+                    { name: "Blockchain", icon: "⛓️" },
+                    { name: "Docker", icon: "🐳" },
+                    { name: "Kubernetes", icon: "☸️" },
+                    { name: "GraphQL", icon: "📊" }
+                ],
+                developmentProcess: {
+                    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                    writeup: `
+                        <h3>Mission-Driven Development</h3>
+                        <p>EcoCommerce was founded on the principle that sustainable shopping shouldn't be difficult. Our team of environmentalists and developers collaborated for 8 months to build a platform that makes eco-friendly choices the default, not an afterthought.</p>
+                        
+                        <h3>Blockchain Integration</h3>
+                        <p>To ensure supply chain transparency, we implemented blockchain technology to create an immutable record of each product's journey. Every step from raw material sourcing to final delivery is recorded, providing consumers with unprecedented visibility into product origins and environmental impact.</p>
+                        
+                        <h3>Carbon Calculation Engine</h3>
+                        <p>Our proprietary carbon calculation system analyzes multiple factors: manufacturing processes, transportation methods, packaging materials, and product lifespan. This required partnerships with environmental scientists and integration with multiple carbon databases to ensure accuracy.</p>
+                        
+                        <h3>Community Impact</h3>
+                        <p>Since launch, EcoCommerce has facilitated $12M in sustainable purchases, saved an estimated 2,400 tons of CO2 emissions, and onboarded 800+ verified sustainable brands. User surveys show 92% feel more confident about their purchasing decisions using our platform.</p>
+                    `
+                }
+            },
+            {
+                id: 6,
+                title: "LearnHub",
+                genre: "Education • E-Learning",
+                image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=400&h=700&fit=crop",
+                description: "An innovative learning platform that adapts to each student's pace and learning style. LearnHub combines interactive courses, live tutoring, peer collaboration, and AI-driven personalized learning paths to make education accessible and effective for everyone.",
+                videoId: "video3",
+                downloads: [
+                    { platform: "Windows", icon: "assets/images/elements/windows-com.svg", url: "#" },
+                    { platform: "Android", icon: "assets/images/elements/android.svg", url: "#" }
+                ],
+                features: [
+                    {
+                        title: "Adaptive Learning",
+                        icon: "🎓",
+                        description: "AI adjusts content difficulty based on your performance and learning speed",
+                        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Live Tutoring",
+                        icon: "👩‍🏫",
+                        description: "Connect with expert tutors for one-on-one sessions anytime",
+                        image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Interactive Labs",
+                        icon: "🔬",
+                        description: "Hands-on virtual labs for science, coding, and technical subjects",
+                        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Progress Analytics",
+                        icon: "📈",
+                        description: "Detailed insights into learning progress and knowledge retention",
+                        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop"
+                    }
+                ],
+                technologies: [
+                    { name: "Angular", icon: "🅰️" },
+                    { name: "Spring Boot", icon: "🍃" },
+                    { name: "MySQL", icon: "🐬" },
+                    { name: "TensorFlow", icon: "🧠" },
+                    { name: "WebRTC", icon: "📹" },
+                    { name: "Redis", icon: "🔴" },
+                    { name: "ElasticSearch", icon: "🔍" },
+                    { name: "AWS", icon: "☁️" }
+                ],
+                developmentProcess: {
+                    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                    writeup: `
+                        <h3>Reimagining Online Education</h3>
+                        <p>LearnHub began as a research project into why online courses have such high dropout rates. After interviewing 500+ students and educators, we identified the core issue: one-size-fits-all content that doesn't adapt to individual learning needs. This insight shaped our entire platform design.</p>
+                        
+                        <h3>Adaptive Learning Algorithm</h3>
+                        <p>Our adaptive learning engine tracks 35 different metrics per student including question response time, error patterns, topic mastery, and engagement levels. Using reinforcement learning, the system creates personalized learning paths that optimize for both speed and retention, reducing average course completion time by 40% while improving test scores by 25%.</p>
+                        
+                        <h3>Virtual Lab Environment</h3>
+                        <p>Building interactive labs required creating isolated sandbox environments that could safely execute student code and simulate scientific experiments. We developed a containerized system using Docker that spins up dedicated environments in under 3 seconds, supporting everything from Python programming to chemistry simulations.</p>
+                        
+                        <h3>Educational Impact</h3>
+                        <p>LearnHub now serves 500,000 students across 120 countries. Course completion rates average 78%, compared to the industry standard of 15%. The platform hosts 2,000+ courses, employs 800+ tutors, and has issued 200,000+ certificates. Partner institutions report that LearnHub students show 30% better knowledge retention compared to traditional online courses.</p>
+                    `
+                }
+            },
+            {
+                id: 7,
+                title: "HomeIQ",
+                genre: "Smart Home • IoT",
+                image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=700&fit=crop",
+                description: "The ultimate smart home control center that unifies all your IoT devices into one intuitive interface. HomeIQ uses AI to learn your routines, optimize energy usage, and enhance home security while providing seamless voice and app control.",
+                videoId: "video1",
+                downloads: [
+                    { platform: "Windows", icon: "assets/images/elements/windows-com.svg", url: "#" },
+                    { platform: "Android", icon: "assets/images/elements/android.svg", url: "#" }
+                ],
+                features: [
+                    {
+                        title: "Universal Device Control",
+                        icon: "🎛️",
+                        description: "Control all smart devices from any brand in one unified app",
+                        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "AI Automation",
+                        icon: "🤖",
+                        description: "Smart routines that learn and adapt to your lifestyle patterns",
+                        image: "https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Energy Optimization",
+                        icon: "⚡",
+                        description: "Reduce energy bills by up to 40% with intelligent power management",
+                        image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Security Suite",
+                        icon: "🔒",
+                        description: "Advanced monitoring with facial recognition and anomaly detection",
+                        image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=600&h=400&fit=crop"
+                    }
+                ],
+                technologies: [
+                    { name: "Flutter", icon: "📱" },
+                    { name: "Python", icon: "🐍" },
+                    { name: "MQTT", icon: "📡" },
+                    { name: "TensorFlow", icon: "🧠" },
+                    { name: "InfluxDB", icon: "📊" },
+                    { name: "RabbitMQ", icon: "🐰" },
+                    { name: "Zigbee", icon: "📶" },
+                    { name: "Kubernetes", icon: "☸️" }
+                ],
+                developmentProcess: {
+                    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                    writeup: `
+                        <h3>The Fragmented Smart Home Problem</h3>
+                        <p>HomeIQ emerged from frustration with the fragmented smart home ecosystem. Users often need 5-10 different apps to control their devices, creating a poor user experience. Our vision was to create a universal controller that works with every major smart home protocol and brand.</p>
+                        
+                        <h3>Protocol Integration Challenges</h3>
+                        <p>Supporting multiple IoT protocols (Zigbee, Z-Wave, Wi-Fi, Thread, Matter) required building a flexible middleware layer. We implemented protocol adapters that translate between different communication standards, allowing seamless control of devices regardless of their native protocol. This involved reverse-engineering proprietary APIs from 50+ manufacturers.</p>
+                        
+                        <h3>Predictive AI System</h3>
+                        <p>The automation engine uses time-series analysis on sensor data to predict user behavior. It learns patterns like when you typically arrive home, preferred lighting levels at different times, and temperature preferences based on weather. The system achieves 92% accuracy in predicting user actions, enabling truly proactive automation.</p>
+                        
+                        <h3>Market Adoption</h3>
+                        <p>HomeIQ has been installed in 75,000 homes and supports over 2,000 different smart device models. Users report average energy savings of 35% and 90% satisfaction with automation accuracy. The platform processes 50 million device commands daily and maintains 99.8% uptime. We've partnered with major IoT manufacturers to become their recommended control platform.</p>
+                    `
+                }
+            },
+            {
+                id: 8,
+                title: "FinanceFlow",
+                genre: "Finance • Personal Budget",
+                image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=700&fit=crop",
+                description: "Take control of your financial future with FinanceFlow. This comprehensive personal finance app offers budgeting tools, investment tracking, bill management, and AI-powered financial advice to help you make smarter money decisions.",
+                videoId: "video2",
+                downloads: [
+                    { platform: "Windows", icon: "assets/images/elements/windows-com.svg", url: "#" },
+                    { platform: "Android", icon: "assets/images/elements/android.svg", url: "#" }
+                ],
+                features: [
+                    {
+                        title: "Smart Budgeting",
+                        icon: "💰",
+                        description: "Automatic expense categorization with customizable budget alerts",
+                        image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Investment Portfolio",
+                        icon: "📊",
+                        description: "Track stocks, crypto, and assets with real-time market data",
+                        image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Bill Reminders",
+                        icon: "🔔",
+                        description: "Never miss a payment with intelligent bill tracking and alerts",
+                        image: "https://images.unsplash.com/photo-1434626881859-194d67b2b86f?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Financial Insights",
+                        icon: "💡",
+                        description: "AI-powered recommendations for saving and investing",
+                        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop"
+                    }
+                ],
+                technologies: [
+                    { name: "React Native", icon: "⚛️" },
+                    { name: "Node.js", icon: "🟢" },
+                    { name: "PostgreSQL", icon: "🐘" },
+                    { name: "Plaid API", icon: "🏦" },
+                    { name: "Chart.js", icon: "📈" },
+                    { name: "Redis", icon: "🔴" },
+                    { name: "256-bit Encryption", icon: "🔐" },
+                    { name: "AWS", icon: "☁️" }
+                ],
+                developmentProcess: {
+                    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                    writeup: `
+                        <h3>Financial Literacy Through Technology</h3>
+                        <p>FinanceFlow was created to address the financial literacy gap. Research shows 78% of Americans live paycheck to paycheck, often due to lack of visibility into spending patterns. Our goal was to make financial management so simple and automated that anyone could take control of their finances.</p>
+                        
+                        <h3>Bank Integration & Security</h3>
+                        <p>Integrating with thousands of financial institutions required partnering with Plaid for bank connectivity. Security was paramount - we implemented 256-bit encryption, two-factor authentication, biometric login, and achieved SOC 2 Type II certification. All financial data is encrypted at rest and in transit, with regular penetration testing by third-party security firms.</p>
+                        
+                        <h3>AI Financial Advisor</h3>
+                        <p>The AI advisor analyzes spending patterns, income trends, and financial goals to provide personalized recommendations. It considers factors like debt-to-income ratio, emergency fund status, and risk tolerance to suggest optimal saving strategies and investment opportunities. The model was trained on anonymized data from 100,000+ users and validated by certified financial planners.</p>
+                        
+                        <h3>Financial Impact</h3>
+                        <p>FinanceFlow users save an average of $450 per month through better expense visibility and budgeting. The app manages $2.3 billion in tracked assets across 400,000 users. 85% of users report feeling more confident about their financial situation after 6 months of use. We've helped users collectively save $216M and pay off $180M in debt.</p>
+                    `
+                }
+            },
+            {
+                id: 9,
+                title: "TravelMate",
+                genre: "Travel • Trip Planning",
+                image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=700&fit=crop",
+                description: "Your AI-powered travel companion that plans perfect trips tailored to your preferences. TravelMate handles everything from flight bookings and hotel reservations to creating day-by-day itineraries with local recommendations and real-time travel updates.",
+                videoId: "video3",
+                downloads: [
+                    { platform: "Windows", icon: "assets/images/elements/windows-com.svg", url: "#" },
+                    { platform: "Android", icon: "assets/images/elements/android.svg", url: "#" }
+                ],
+                features: [
+                    {
+                        title: "AI Trip Planner",
+                        icon: "🗺️",
+                        description: "Generate complete itineraries in seconds based on your preferences",
+                        image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Smart Booking",
+                        icon: "✈️",
+                        description: "Find best deals on flights, hotels, and activities in one place",
+                        image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Local Experiences",
+                        icon: "🎭",
+                        description: "Discover hidden gems and authentic local experiences",
+                        image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=400&fit=crop"
+                    },
+                    {
+                        title: "Travel Assistant",
+                        icon: "🤳",
+                        description: "Real-time updates on delays, gate changes, and local conditions",
+                        image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&h=400&fit=crop"
+                    }
+                ],
+                technologies: [
+                    { name: "Vue.js", icon: "💚" },
+                    { name: "Python", icon: "🐍" },
+                    { name: "FastAPI", icon: "⚡" },
+                    { name: "MongoDB", icon: "🍃" },
+                    { name: "Google Maps API", icon: "🗺️" },
+                    { name: "Amadeus API", icon: "✈️" },
+                    { name: "TensorFlow", icon: "🧠" },
+                    { name: "Redis", icon: "🔴" }
+                ],
+                developmentProcess: {
+                    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                    writeup: `
+                        <h3>Solving Travel Planning Complexity</h3>
+                        <p>TravelMate was inspired by the overwhelming complexity of modern travel planning. Users spend an average of 20 hours planning a single vacation across multiple websites. Our mission was to consolidate this entire process into a single intelligent platform that handles everything from inspiration to booking.</p>
+                        
+                        <h3>AI Itinerary Generation</h3>
+                        <p>The itinerary AI considers dozens of factors: budget, travel pace preference, interests, mobility constraints, weather forecasts, and crowd patterns. It generates optimized day-by-day plans that minimize travel time between attractions while maximizing experiences. The system was trained on 500,000+ successful trips and achieves 94% user satisfaction with generated itineraries.</p>
+                        
+                        <h3>Multi-API Integration</h3>
+                        <p>Integrating with travel APIs from airlines, hotels, and activity providers presented major challenges. Each API has different rate limits, response formats, and reliability. We built a robust middleware layer with intelligent caching, automatic retry logic, and fallback options. The system monitors 50+ travel APIs simultaneously and can complete a comprehensive search in under 3 seconds.</p>
+                        
+                        <h3>Travel Community</h3>
+                        <p>TravelMate has facilitated 200,000+ trips to 180 countries. Users save an average of 15 hours in planning time and $300 per trip through optimized bookings. The community feature has generated 50,000+ trip reviews and local recommendations. Travel agents and tour operators now use TravelMate as their planning tool, citing its efficiency and comprehensive coverage.</p>
+                    `
+                }
+            }
+        ];
+
+        // Pagination state
+        let currentPage = 1;
+        const projectsPerPage = 3;
+        const totalPages = Math.ceil(projects.length / projectsPerPage);
+
+        // Current videos
+        const videos = {
+            video1: document.getElementById('video1'),
+            video2: document.getElementById('video2'),
+            video3: document.getElementById('video3')
+        };
+        let currentVideo = 'video1';
+
+        function renderProjects() {
+            const container = document.getElementById('projectsContainer');
+            const startIndex = (currentPage - 1) * projectsPerPage;
+            const endIndex = startIndex + projectsPerPage;
+            const pageProjects = projects.slice(startIndex, endIndex);
+
+            container.innerHTML = pageProjects.map(project => `
+                <section class="project-section" data-video="${project.videoId}">
+                    <div class="project-container">
+                        <div class="project-header">
+                            <div class="project-image">
+                                <img src="${project.image}" alt="${project.title}">
+                            </div>
+                            <div class="project-info">
+                                <h1 class="project-title">${project.title}</h1>
+                                <p class="project-genre">${project.genre}</p>
+                                <p class="project-description">${project.description}</p>
+                                <div class="download-links">
+                                    ${project.downloads.map(download => `
+                                        <a href="${download.url}" class="download-btn">
+                                            <img src="${download.icon}" alt="${download.platform}" 
+                                            style="width:25px; height: 25px; filter: brightness(0) invert(1);">
+                                            <span>${download.platform}</span>
+                                        </a>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tech-stack-section">
+                            <h2 class="section-title2">Key Features</h2>
+                            <div class="features-grid">
+                                ${project.features.map(feature => `
+                                    <a href="project-detail.html?id=${project.id}&feature=${encodeURIComponent(feature.title)}" class="feature-card">
+                                        <img src="${feature.image}" alt="${feature.title}" class="feature-image">
+                                        <div class="feature-overlay"></div>
+                                        <div class="feature-tag">
+                                            <span class="feature-icon">${feature.icon}</span>
+                                            <span>${feature.title}</span>
+                                        </div>
+                                        <div class="feature-content">
+                                            <h3 class="feature-title">${feature.title}</h3>
+                                            <p class="feature-description">${feature.description}</p>
+                                        </div>
+                                    </a>
+                                `).join('')}
+                            </div>
+                            <a href="project-detail.html?id=${project.id}" class="view-details-btn">View Full Project Details →</a>
+                        </div>
+
+                        <div class="technologies-section">
+                            <h2 class="section-title2">Software & Technologies Used</h2>
+                            <div class="tech-tags">
+                                ${project.technologies.map(tech => `
+                                    <div class="tech-tag">
+                                        <div class="tech-icon">${tech.icon}</div>
+                                        <span>${tech.name}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="development-process">
+                            <h2 class="section-title2">Development Process</h2>
+                            <div class="process-video">
+                                <iframe width="100%" height="500" src="${project.developmentProcess.video}" 
+                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                            </div>
+                            <div class="process-writeup">
+                                ${project.developmentProcess.writeup}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `).join('');
+
+            updatePagination();
+            setupIntersectionObserver();
+        }
+
+        function updatePagination() {
+            document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderProjects();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderProjects();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function switchVideo(videoId) {
+            if (currentVideo === videoId || !videos[videoId]) return;
+
+            Object.values(videos).forEach(video => {
+                video.classList.remove('active');
+                video.pause();
+            });
+
+            videos[videoId].classList.add('active');
+            videos[videoId].play();
+            currentVideo = videoId;
+        }
+
+        function setupIntersectionObserver() {
+            const sections = document.querySelectorAll('.project-section');
+            
+            const observerOptions = {
+                threshold: 0,
+                rootMargin: '-40% 0px -40% 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const videoId = entry.target.getAttribute('data-video');
+                        switchVideo(videoId);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        // Initialize
+        videos[currentVideo].classList.add('active');
+        videos[currentVideo].play();
+        renderProjects();
+    </script>
+</body>
+</html>

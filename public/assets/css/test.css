@@ -1,0 +1,113 @@
+:root {
+    --font: 'Arial', sans-serif;
+    --font-alt: 'Georgia', serif;
+    --dark-text: #333333;
+    --light-text: #666666;
+    --widget-grey: #f5f5f5;
+    --primary: #007bff;
+    --accent: #ffc107;
+    --fade-grey: #e0e0e0;
+    --smoke-white: #f8f9fa;
+    --dark-sidebar: #343a40;
+    --primary-box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
+    --accent-box-shadow: 0 4px 6px rgba(255, 193, 7, 0.1);
+    --dark-dark-text: #1a1a1a;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --padding: 16px;
+    --margin-bottom: 24px;
+  }
+  
+  body {
+    font-family: var(--font);
+    color: var(--dark-text);
+    background-color: var(--smoke-white);
+  }
+  
+  .profile-section {
+    max-width: 800px;
+    margin: auto;
+    padding: var(--padding);
+  }
+  
+  .user-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--widget-grey);
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: var(--margin-bottom);
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-info .avatar {
+    border-radius: var(--border-radius);
+    margin-right: var(--padding);
+  }
+  
+  .user-details h2 {
+    font-family: var(--font-alt);
+    color: var(--dark-dark-text);
+    margin-bottom: var(--padding);
+  }
+  
+  .user-details p {
+    margin: 4px 0;
+  }
+  
+  .user-contact p {
+    margin: 4px 0;
+  }
+  
+  .user-contact a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  
+  .user-contact a:hover {
+    text-decoration: underline;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: var(--margin-bottom);
+  }
+  
+  .tab-button {
+    background-color: var(--smoke-white);
+    border: 1px solid var(--fade-grey);
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+  }
+  
+  .tab-button.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  
+  .tab-content {
+    background-color: var(--widget-grey);
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .tab-pane {
+    display: none;
+  }
+  
+  .tab-pane.active {
+    display: block;
+  }
+  

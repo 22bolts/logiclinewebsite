@@ -89,6 +89,7 @@
 
 <body>
 
+<script src="assets/js/userDetails.js"></script>
 <!-- Header START -->
 <header class="header-sticky header-absolute">
 	<!-- Logo Nav START -->
@@ -103,7 +104,7 @@
 
 			<!-- Main navbar START -->
 			<div class="navbar-collapse collapse" id="navbarCollapse">
-				<ul class="navbar-nav navbar-nav-scroll dropdown-hover mx-auto">
+				<ul class="navbar-nav navbar-nav-scroll dropdown-hover mx-auto">	
 
 					<!-- Nav item -->
 					<li class="nav-item dropdown">
@@ -435,10 +436,7 @@ Content START -->
 							<div class="card-header text-center border-bottom">
 									<!-- Avatar -->
 									<div class="avatar avatar-xl position-relative mb-2">
-										<img class="avatar-img rounded-circle border border-2 border-white" src="assets/images/avatar/05.jpg" alt="">
-										<a href="#" class="btn btn-sm btn-round btn-dark position-absolute top-50 start-100 translate-middle mt-4 ms-n3" data-bs-toggle="tooltip" data-bs-title="Edit profile">
-												<i class="bi bi-pencil-square"></i>
-										</a>
+										<img class="avatar-img rounded-circle border border-2 border-white" src="assets/images/bg/05.jpg" alt="">
 									</div>
 									<h6 class="mb-0">Jacqueline Miller</h6>
 									<a href="#" class="text-reset text-primary-hover small">hello@gmail.com</a>
@@ -500,7 +498,7 @@ Content START -->
 				</div>
 
 				<!-- Personal Information -->
-				<form>
+				<form id="updateInfo">
 					<div class="card bg-transparent p-0">
 						<!-- Card header -->
 						<div class="card-header bg-transparent border-bottom p-0 pb-3">
@@ -516,47 +514,46 @@ Content START -->
 									<div class="d-flex align-items-center">
 										<label class="position-relative me-2" title="Replace this pic">
 											<!-- Avatar place holder -->
-											<span class="avatar avatar-xl">
-												<img class="avatar-img rounded-circle border border-white border-3 shadow" src="assets/images/avatar/07.jpg" alt="">
+											<span class="avatar avatar-xl position-relative mb-2">
+												<img id="avatar-img" class="avatar-img rounded-circle border border-white border-3 shadow" src="assets/images/avatar/07.jpg" alt="">
 											</span>
+											<!-- <div id="file-preview" class="file-preview avatar avatar-xl position-relative mb-2"></div> -->
 											<!-- Remove btn -->
-											<button class="uploadremove"><i class="bi bi-x text-white"></i></button>
+											<!-- <button class="uploadremove"><i class="bi bi-x text-white"></i></button> -->
 										</label>
 										<!-- Upload button -->
-										<label class="btn btn-sm btn-dark mb-0">Change</label>
-										<input class="form-control d-none" type="file">
+										<label class="btn btn-sm btn-dark mb-0" id="send-file">Change</label>
+										<input class="form-control d-none" id="file-input" type="file">
 									</div>
 								</div>
 								<!-- Full name -->
 								<div class="col-12">
 									<label class="form-label">Full name</label>
 									<div class="input-group">
-										<input type="text" class="form-control" value="Jacqueline" placeholder="First name">
-										<input type="text" class="form-control" value="Miller" placeholder="Last name">
+										<input type="text" class="form-control" value="Jacqueline" placeholder="First name" id="first_name">
+										<input type="text" class="form-control" value="Jonas" placeholder="Middle name" id="middle_name">
+										<input type="text" class="form-control" value="Miller" placeholder="Last name" id="last_name">
 									</div>
 								</div>
 		
 								<!-- Email -->
 								<div class="col-md-6">
 									<label class="form-label">Email address</label>
-									<input type="email" class="form-control" value="hello@gmail.com" placeholder="Enter your email id">
+									<input type="email" class="form-control" value="hello@gmail.com" placeholder="Enter your email id" id="email_address">
 								</div>
 		
 								<!-- Mobile -->
 								<div class="col-md-6">
 									<label class="form-label">Mobile number</label>
-									<input type="text" class="form-control" value="222 555 666" placeholder="Enter your mobile number">
+									<input type="text" class="form-control" value="222 555 666" placeholder="Enter your mobile number" id="phone_number">
 								</div>
 		
 								<!-- Nationality -->
 								<div class="col-md-6">
-									<label class="form-label">Nationality</label>
-									<select class="form-select">
-										<option value="">Select your country</option>
-										<option>USA</option>
-										<option selected="">Paris</option>
-										<option>India</option>
-										<option>UK</option>
+									<label class="form-label">Role</label>
+									<select class="form-select" id="role">
+										<option value="client">Client</option>
+										<option value="freelancer">Freelancer</option>
 									</select>
 								</div>
 		
@@ -601,7 +598,7 @@ Content START -->
 		
 								<!-- Button -->
 								<div class="col-12 text-end">
-									<a href="#" class="btn btn-primary mb-0">Save Changes</a>
+									<button class="btn btn-primary mb-0" type="submit">Save changes</button>
 								</div>
 		
 							</div>
@@ -821,6 +818,7 @@ Footer END -->
 
 <!-- Theme Functions -->
 <script src="assets/js/functions.js"></script>
+<script src="assets/js/account/editAccount.js"></script>
 
 </body>
 </html>

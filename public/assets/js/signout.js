@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = '/index.html'; // Replace with your actual sign-in page URL
     });
 
-    console.log("Sign out in process");
+    // console.log("Sign out in process");
 
     // Load user details dynamically
     const userDetailsElement = document.getElementById('userDetails');
